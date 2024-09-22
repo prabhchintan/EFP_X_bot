@@ -11,12 +11,12 @@ jobs:
     timeout-minutes: 15  # Set a 15-minute timeout
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4.1.7
       with:
         fetch-depth: 0  # Fetch all history for all branches and tags
     
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5.2.0
       with:
         python-version: '3.9'
     

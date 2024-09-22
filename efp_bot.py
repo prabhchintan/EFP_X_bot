@@ -79,52 +79,58 @@ def save_state(state):
         json.dump(state, f, indent=2)
 
 @backoff.on_exception(backoff.expo, requests.RequestException, max_tries=MAX_RETRIES)
-def get_endpoint_data(user, endpoint, params=None):
-    url = f"{EFP_API_BASE}/users/{user}/{endpoint}"
+def get_endpoint_data(endpoint, params=None):
+    url = f"{EFP_API_BASE}/{endpoint}"
     response = requests.get(url, params=params)
     response.raise_for_status()
     return response.json()
 
-def get_paginated_data(user, endpoint):
+def get_paginated_data(endpoint, data_key, params=None):
     all_data = []
     offset = 0
     limit = 100
     while True:
         try:
-            data = get_endpoint_data(user, endpoint, params={'offset': offset, 'limit': limit})
-            all_data.extend(data.get(endpoint, []))
-            if len(data.get(endpoint, [])) < limit:
+            params = params or {}
+            params.update({'offset': offset, 'limit': limit})
+            data = get_endpoint_data(endpoint, params)
+            if data_key not in data:
+                break
+            all_data.extend(data[data_key])
+            if len(data[data_key]) < limit:
                 break
             offset += limit
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
-                logging.warning(f"404 Not Found for user {user} at paginated endpoint {endpoint}. Did they rug pull their account?")
-                return None
-            raise
+                logging.warning(f"404 Not Found for endpoint {endpoint}. Did they rug pull their account?")
+            break
     return all_data
 
 def get_user_data(user):
     user_data = {}
-    endpoints = ['details', 'stats', 'lists', 'following', 'ens', 'account', 'allFollowing', 'allFollowers']
+    try:
+        # Get user details
+        details = get_endpoint_data(f"users/{user}/details")
+        user_data['details'] = details
+        primary_list_id = details.get('primary_list')
+        
+        if not primary_list_id:
+            logging.error(f"No primary list found for {user}. They're like a ghost in the machine!")
+            return None
 
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_endpoint = {
-            executor.submit(get_endpoint_data, user, endpoint): endpoint 
-            for endpoint in endpoints if endpoint not in ['following', 'allFollowing', 'allFollowers']
-        }
-        future_to_endpoint[executor.submit(get_paginated_data, user, 'following')] = 'following'
-        future_to_endpoint[executor.submit(get_paginated_data, user, 'allFollowing')] = 'allFollowing'
-        future_to_endpoint[executor.submit(get_paginated_data, user, 'allFollowers')] = 'allFollowers'
+        # Get other user data
+        user_data['stats'] = get_endpoint_data(f"lists/{primary_list_id}/stats")
+        user_data['ens'] = get_endpoint_data(f"users/{user}/ens")
+        user_data['account'] = get_endpoint_data(f"users/{user}/account")
+        
+        # Get list data
+        user_data['lists'] = get_endpoint_data(f"lists/{primary_list_id}/details")
+        user_data['allFollowing'] = get_paginated_data(f"lists/{primary_list_id}/allFollowing", 'following')
+        user_data['allFollowers'] = get_paginated_data(f"lists/{primary_list_id}/allFollowers", 'followers')
 
-        for future in as_completed(future_to_endpoint):
-            endpoint = future_to_endpoint[future]
-            try:
-                data = future.result()
-                user_data[endpoint] = data
-                logging.info(f"Successfully fetched {endpoint} data for {user}. It's like finding a diamond in the blockchain!")
-            except Exception as e:
-                logging.error(f"Error fetching {endpoint} for {user}: {e}. Looks like their data is more elusive than a rare NFT!")
-                user_data[endpoint] = None
+    except Exception as e:
+        logging.error(f"Error fetching data for {user}: {e}. Looks like their data is more elusive than a rare NFT!")
+        return None
 
     return user_data if all(user_data.values()) else None
 
@@ -150,8 +156,8 @@ def detect_changes(old_data, new_data):
         changes.append(("list_change", f"{random.choice(ETH_ACTIONS['list_change'])} ({len(new_lists) - len(old_lists)} new lists)"))
     
     # Check for significant follower changes
-    old_followers = old_data.get('stats', {}).get('followers', 0)
-    new_followers = new_data.get('stats', {}).get('followers', 0)
+    old_followers = int(old_data.get('stats', {}).get('followers_count', 0))
+    new_followers = int(new_data.get('stats', {}).get('followers_count', 0))
     follower_change = new_followers - old_followers
     if abs(follower_change) >= FOLLOWER_CHANGE_THRESHOLD:
         changes.append(("follower_change", f"{random.choice(ETH_ACTIONS['follower_change'])} ({follower_change:+d} followers)"))
@@ -172,15 +178,15 @@ def detect_changes(old_data, new_data):
         changes.append(("unfollow", f"{random.choice(ETH_ACTIONS['unfollow'])} ({len(unfollowed)} accounts)"))
     
     # Check for blocks
-    old_blocks = set(f['data'] for f in old_data.get('allFollowing', []) if 'block' in f.get('tags', []))
-    new_blocks = set(f['data'] for f in new_data.get('allFollowing', []) if 'block' in f.get('tags', []))
+    old_blocks = set(f['data'] for f in old_data.get('allFollowing', []) if f.get('is_blocked', False))
+    new_blocks = set(f['data'] for f in new_data.get('allFollowing', []) if f.get('is_blocked', False))
     blocked = new_blocks - old_blocks
     if blocked:
         changes.append(("block", f"{random.choice(ETH_ACTIONS['block'])} ({len(blocked)} accounts)"))
     
     # Check for mutes
-    old_mutes = set(f['data'] for f in old_data.get('allFollowing', []) if 'mute' in f.get('tags', []))
-    new_mutes = set(f['data'] for f in new_data.get('allFollowing', []) if 'mute' in f.get('tags', []))
+    old_mutes = set(f['data'] for f in old_data.get('allFollowing', []) if f.get('is_muted', False))
+    new_mutes = set(f['data'] for f in new_data.get('allFollowing', []) if f.get('is_muted', False))
     muted = new_mutes - old_mutes
     if muted:
         changes.append(("mute", f"{random.choice(ETH_ACTIONS['mute'])} ({len(muted)} accounts)"))
@@ -218,7 +224,7 @@ def generate_individual_tweets(all_changes):
     for user, changes in all_changes:
         intro = random.choice(ETH_INTROS)
         action = random.choice([c[1] for c in changes])
-        tweet = f"{intro}\n\n🧙‍♂️ {user} {action}\n\nCatch all the @efp action at https://testing.ethfollow.xyz/{user} 🍿"
+        tweet = f"{intro}\n\n🧙‍♂️ {user} {action}\n\nCatch all the @efp action at https://ethfollow.xyz/{user} 🍿"
         tweets.append(tweet[:280])  # Ensure we don't exceed Twitter's character limit
         if len(tweets) == MAX_TWEETS_PER_RUN:
             break
@@ -274,6 +280,8 @@ def main():
         tweets = generate_individual_tweets(all_changes)
         for tweet in tweets:
             post_individual_tweet(tweet)
+    else:
+        logging.info("No changes detected for any users. The crypto world is quiet today!")
     
     total_time = time.time() - start_time
     logging.info(f"Total execution time: {total_time:.2f} seconds. We're faster than a Solana transaction... wait, is that a compliment?")
