@@ -1,0 +1,1715 @@
+Introduction
+EFP provides an open source indexer and API for indexing and retrieving EFP data.
+
+Public API
+EFP core team provides a public API endpoint at https://api.ethfollow.xyz/api/v1.
+
+If you are a developer, you are free to use this endpoint to retrieve EFP data.
+
+Commonly used endpoints
+User Stats: the follower and following counts of a particular user
+User Following: list of the accounts a particular user follows
+User Followers: list of the accounts that follow a particular user
+User ENS data: the ENS data for a particular user
+Self-hosting
+You may also fork EFP’s Indexer/API source code and deploy yourself.
+
+ethereumfollowprotocol/api
+ethereumfollowprotocol/indexer
+
+Discover
+/discover
+Get recently active accounts to follow.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/discover
+
+// sample response
+{
+  "latestFollows": [
+    {
+      "address": "0x8513eef11bba6a57845d10780e7e889e3be289e8",
+      "name": "oandrade.eth",
+      "avatar": "https://metadata.ens.domains/mainnet/avatar/oandrade.eth",
+      "followers": "5",
+      "following": "15"
+    },
+    {
+      "address": "0xb6518c8304992da58de9055f1db80a37609f00a2",
+      "name": "silvr.eth",
+      "avatar": "https://euc.li/silvr.eth",
+      "followers": "1",
+      "following": "0"
+    },
+    {
+      "address": "0x8eddf5431f5b31933bfbd8111d54fc6e9456e6c1",
+      "name": "slowsort.eth",
+      "avatar": "https://euc.li/slowsort.eth",
+      "followers": "49",
+      "following": "565"
+    },
+    {
+      "address": "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+      "name": "garypalmerjr.eth",
+      "avatar": "https://metadata.ens.domains/mainnet/avatar/garypalmerjr.eth",
+      "followers": "152",
+      "following": "3403"
+    },
+    ...
+  ]
+}
+
+Export State
+/exportState/:token_id
+Get all accounts that are being followed by EFP list id, excludes blocks and mutes
+
+Path Parameters
+token_id (string): The EFP List of the account
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/exportState/333
+
+// sample response
+{
+  "following": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x4c47ab777f1f64d1f3d6efbf1cc7ab5a5224af4a",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x5b76f5b8fc9d700624f78208132f91ad4e61a1f0",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x27cd3a463df1b3f6c95a222616d474be009c2cbb",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xd1efdd037566b0c75cebace9150d26ea0153faa9",
+      "tags": []
+    }
+  ]
+}
+
+Blocked
+/leaderboard/blocked
+Get leaderboard of users ranked according to count of users that blocked them.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/blocked
+
+// sample response
+[
+  {
+    "rank": 1,
+    "address": "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+    "blocked_by_count": "8"
+  },
+  {
+    "rank": 2,
+    "address": "0xa7860e99e3ce0752d1ac53b974e309fff80277c6",
+    "blocked_by_count": "4"
+  },
+  {
+    "rank": 3,
+    "address": "0x3276e82ebb1b4b9f01ab9286ed6bcc6603e368e2",
+    "blocked_by_count": "2"
+  },
+  {
+    "rank": 4,
+    "address": "0x7265a60acaeaf3a5e18e10bc1128e72f27b2e176",
+    "blocked_by_count": "2"
+  },
+  ...
+]
+
+Blocks
+/leaderboard/blocks
+Get leaderboard of users ranked according to count of users that they blocked.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/blocks
+
+// sample response
+[
+  {
+    "rank": 1,
+    "address": "0xc808ffa16d6773d6a9109b1ab92e839157eb0954",
+    "blocks_count": "119"
+  },
+  {
+    "rank": 2,
+    "address": "0xfa35730094b7e0fc1b97f55663aad15e2d2e3e29",
+    "blocks_count": "3"
+  },
+  {
+    "rank": 3,
+    "address": "0x983110309620d911731ac0932219af06091b6744",
+    "blocks_count": "2"
+  },
+  {
+    "rank": 4,
+    "address": "0x2933387ec4c9bbc4a8200cfd77db53d7bc8ebc11",
+    "blocks_count": "1"
+  },
+  ...
+]
+
+Count
+/leaderboard/count
+Get count of all accounts in the leaderboard.
+
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/count
+
+// sample response
+{
+  "leaderboardCount": "8788"
+}
+
+Followers
+/leaderboard/followers
+Get leaderboard of users ranked according to follower counts.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/followers
+
+// sample response
+[
+  {
+    "rank": 1,
+    "address": "0x983110309620d911731ac0932219af06091b6744",
+    "followers_count": "365"
+  },
+  {
+    "rank": 2,
+    "address": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+    "followers_count": "285"
+  },
+  {
+    "rank": 3,
+    "address": "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
+    "followers_count": "270"
+  },
+  {
+    "rank": 4,
+    "address": "0x5b76f5b8fc9d700624f78208132f91ad4e61a1f0",
+    "followers_count": "228"
+  },
+  ...
+]
+
+Following
+/leaderboard/following
+Get leaderboard of users ranked according to following counts.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/following
+
+// sample response
+[
+  {
+    "rank": 1,
+    "address": "0x44a3a18df15ae79bbc6c660db59428fe9a181864",
+    "following_count": "5639"
+  },
+  {
+    "rank": 2,
+    "address": "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+    "following_count": "3403"
+  },
+  {
+    "rank": 3,
+    "address": "0xd4713cca4068700cf722f8c2b6c05f948b75321b",
+    "following_count": "2782"
+  },
+  {
+    "rank": 4,
+    "address": "0xd1efdd037566b0c75cebace9150d26ea0153faa9",
+    "following_count": "1556"
+  },
+  ...
+]
+
+Muted
+/leaderboard/muted
+Get leaderboard of users ranked according to count of users that muted them.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/muted
+
+// sample response
+[
+  {
+    "rank": 1,
+    "address": "0x949e2988b857af2a3c9429e763d13202b7b25c88",
+    "muted_by_count": "1"
+  }
+]
+
+Mutes
+/leaderboard/mutes
+Get leaderboard of users ranked according to count of users that they muted.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/mutes
+
+// sample response
+[
+  {
+    "rank": 2,
+    "address": "0xfa35730094b7e0fc1b97f55663aad15e2d2e3e29",
+    "mutes_count": "3"
+  },
+  {
+    "rank": 3,
+    "address": "0x983110309620d911731ac0932219af06091b6744",
+    "mutes_count": "2"
+  },
+  {
+    "rank": 4,
+    "address": "0x2933387ec4c9bbc4a8200cfd77db53d7bc8ebc11",
+    "mutes_count": "1"
+  },
+]
+
+Ranked
+/leaderboard/ranked
+Get leaderboard of users ranked according to count of mutual follows. Includes rankings for mutuals, followers, following, blocked and tagged as ‘top8’.
+
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 50.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+sort (string, optional): Specifies ranking to sort on, possible values are ‘mutuals’, ‘followers’, ‘following’, ‘blocked’ and ‘top8’, default value is ‘mutuals’.
+direction (string, optional): Specifies direction to sort results, possible values are ‘ASC’ or ‘DESC’ default value is ‘DESC’.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/ranked?sort=mutuals&direction=desc
+
+// sample response
+{
+  "last_updated": "2024-09-18T19:11:43.210Z",
+  "results": [
+    {
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "name": "brantly.eth",
+      "avatar": "https://euc.li/brantly.eth",
+      "mutuals_rank": "1",
+      "followers_rank": "1",
+      "following_rank": "6",
+      "blocks_rank": "7",
+      "top8_rank": "1",
+      "mutuals": "293",
+      "following": "1079",
+      "followers": "366",
+      "blocks": "1",
+      "top8": "45",
+      "updated_at": "2024-09-18T19:11:43.210Z"
+    },
+    {
+      "address": "0xd1efdd037566b0c75cebace9150d26ea0153faa9",
+      "name": "designer.eth",
+      "avatar": "https://euc.li/designer.eth",
+      "mutuals_rank": "2",
+      "followers_rank": "6",
+      "following_rank": "4",
+      "blocks_rank": "7",
+      "top8_rank": "7",
+      "mutuals": "147",
+      "following": "1556",
+      "followers": "182",
+      "blocks": "1",
+      "top8": "7",
+      "updated_at": "2024-09-18T19:11:43.210Z"
+    },
+    {
+      "address": "0x2a59071ff48936c6838dcac425fa0df6ea5979bf",
+      "name": "mely.eth",
+      "avatar": "https://euc.li/mely.eth",
+      "mutuals_rank": "3",
+      "followers_rank": "12",
+      "following_rank": "28",
+      "blocks_rank": "7",
+      "top8_rank": "5",
+      "mutuals": "124",
+      "following": "354",
+      "followers": "138",
+      "blocks": "1",
+      "top8": "11",
+      "updated_at": "2024-09-18T19:11:43.210Z"
+    },
+    ...
+  ]
+}
+
+Search
+/leaderboard/search
+Search for leaderboard addresses and ENS names by a specified search term.
+
+Query Parameters
+term (string, optional): Specifies the string to search for in a leaderboard address or ENS name.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/leaderboard/search?term=eth
+
+// sample response
+{
+  "last_updated": "2024-09-18T19:11:43.210Z",
+  "results": [
+    {
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "name": "brantly.eth",
+      "avatar": "https://euc.li/brantly.eth",
+      "mutuals_rank": "1",
+      "followers_rank": "1",
+      "following_rank": "6",
+      "blocks_rank": "7",
+      "mutuals": "293",
+      "following": "1079",
+      "followers": "366",
+      "blocks": "1",
+      "updated_at": "2024-09-18T19:11:43.210Z"
+    },
+    {
+      "address": "0xd1efdd037566b0c75cebace9150d26ea0153faa9",
+      "name": "designer.eth",
+      "avatar": "https://euc.li/designer.eth",
+      "mutuals_rank": "2",
+      "followers_rank": "6",
+      "following_rank": "4",
+      "blocks_rank": "7",
+      "mutuals": "147",
+      "following": "1556",
+      "followers": "182",
+      "blocks": "1",
+      "updated_at": "2024-09-18T19:11:43.210Z"
+    },
+    {
+      "address": "0x2a59071ff48936c6838dcac425fa0df6ea5979bf",
+      "name": "mely.eth",
+      "avatar": "https://euc.li/mely.eth",
+      "mutuals_rank": "3",
+      "followers_rank": "12",
+      "following_rank": "28",
+      "blocks_rank": "7",
+      "mutuals": "124",
+      "following": "354",
+      "followers": "138",
+      "blocks": "1",
+      "updated_at": "2024-09-18T19:11:43.210Z"
+    },
+    ...
+  ]
+}
+
+Account
+/lists/:token_id/account
+Get account information by their EFP list id
+
+Path Parameters
+token_id (string): The EFP List of the account
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/details
+
+// sample response
+{
+  "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+  "ens": {
+    "name": "0xthrpw.eth",
+    "avatar": "https://euc.li/0xthrpw.eth",
+    "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+    "display": "0xthrpw.eth",
+    "records": {
+      "avatar": "https://euc.li/0xthrpw.eth",
+      "com.github": "0xthrpw",
+      "com.twitter": "0xthrpw",
+      "description": "Took the mirrors off my cadillac because I don't like looking like I look back.",
+      "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+      "name": "throw;"
+    },
+    "chains": {
+      "eth": "0xC9C3A4337a1bba75D0860A1A81f7B990dc607334"
+    },
+    "fresh": 1726679594366,
+    "resolver": "0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63",
+    "errors": {}
+  },
+  "ranks": {
+    "mutuals_rank": "4",
+    "followers_rank": "17",
+    "following_rank": "18",
+    "top8_rank": "12",
+    "blocks_rank": "7"
+  },
+  "primary_list": "3"
+}
+
+All Followers
+/lists/:token_id/allFollowers
+Get all followers (including blocked and muted) of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+tags (string, optional): Specifies an array of comma separated tags, of which each account in the response should have at least one.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/4/allFollowers
+
+// sample response
+{
+  "followers": [
+    {
+      "efp_list_nft_token_id": "15",
+      "address": "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
+      "tags": [],
+      "is_following": true,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "294",
+      "address": "0xa7860e99e3ce0752d1ac53b974e309fff80277c6",
+      "tags": [
+        "top8"
+      ],
+      "is_following": false,
+      "is_blocked": true,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "55",
+      "address": "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+      "tags": [
+        "bff",
+        "top8"
+      ],
+      "is_following": false,
+      "is_blocked": true,
+      "is_muted": false
+    },
+    ...
+  ]
+}
+
+All Following
+/lists/:token_id/allFollowing
+Get all accounts being followed (including blocked and muted) by a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+tags (string, optional): Specifies an array of comma separated tags, of which each account in the response should have at least one.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/4/allFollowing
+
+// sample response
+{
+  "following": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xad73eafcac4f4c6755dfc61770875fb8b6bc8a25",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xfee41e0f01112d9bdaa73a5a368f4afb4d9baa08",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xf972bf8592c3171b378e97bb869a980c3f476583",
+      "tags": []
+    },
+    ...
+  ]
+}
+
+All Following Addresses
+/lists/:token_id/allFollowingAddresses
+Get all accounts in list format, that are being followed (including blocked and muted) by a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/4/allFollowingAddresses
+
+// sample response
+[
+  "0xc6ed8696c4885dcafdc73c5ef28511e02568b472",
+  "0x1cbf9983e0d59276a58db8e8529706004fcb1837",
+  "0x27d311b8958ca479615522304b442e530c8073fe",
+  "0x47c0224f6c298c4b03f2fbbb986815859a0abd20",
+  "0x50e97e480661533b5382e33705e4ce1eb182222e",
+  "0x8480d20583a3138fef7c23eed8f17bf3c01e73b7",
+  "0x97b5c5ac8813bf5aaf689bbb697b56f8d897baef",
+  "0xa6bcb89f21e0bf71e08ded426c142757791e17cf",
+  "0xdc27cb447d713a8320db054a39ab6a42e0af49cb",
+  "0x02ca10c62f160cdd126d1e44ef42224cac745ac8",
+  "0x0433062f9f466c4a184b2ba0e4da38efea5e2f87",
+  ...
+]
+
+Button State
+/lists/:token_id/:addressOrENS/buttonState
+Get the following state between a given list and a given user.
+
+Path Parameters
+token_id (string): The EFP List of the account
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/brantly.eth/buttonState
+
+// sample response
+{
+  "token_id": "3",
+  "address": "0x983110309620d911731ac0932219af06091b6744",
+  "state": {
+    "follow": true,
+    "block": false,
+    "mute": false
+  }
+}
+
+Details
+/lists/:token_id/details
+Get details of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+token_id (string): The EFP List of the account
+
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/details
+
+// sample response
+{
+  "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+  "ens": {
+    "name": "0xthrpw.eth",
+    "avatar": "https://euc.li/0xthrpw.eth",
+    "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+    "display": "0xthrpw.eth",
+    "records": {
+      "avatar": "https://euc.li/0xthrpw.eth",
+      "com.github": "0xthrpw",
+      "com.twitter": "0xthrpw",
+      "description": "Took the mirrors off my cadillac because I don't like looking like I look back.",
+      "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+      "name": "throw;"
+    },
+    "chains": {
+      "eth": "0xC9C3A4337a1bba75D0860A1A81f7B990dc607334"
+    },
+    "fresh": 1726680254493,
+    "resolver": "0x231b0Ee14048e9dCcD1d247744d114a4EB5E8E63",
+    "errors": {}
+  },
+  "ranks": {
+    "mutuals_rank": "4",
+    "followers_rank": "17",
+    "following_rank": "18",
+    "top8_rank": "12",
+    "blocks_rank": "7"
+  },
+  "primary_list": "3"
+}
+
+Followers
+/lists/:token_id/followers
+Get followers (excluding blocked and muted) of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+tags (string, optional): Specifies an array of comma separated tags, of which each account in the response should have at least one.
+sort (string, optional): Specifies how the results should be sorted, possible values ‘latest’, ‘earliest’, ‘followers’. If not specified, default sort is ‘latest’
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/4/followers
+
+// sample response
+{
+  "followers": [
+    {
+      "efp_list_nft_token_id": "325",
+      "address": "0x9b2fb7a8d227cdaa8002f80e8c8a99a19bb1b969",
+      "tags": [],
+      "is_following": true,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "728",
+      "address": "0xca034d4438719391b5e7589242a36ec535ed6836",
+      "tags": [],
+      "is_following": false,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "723",
+      "address": "0x8901083bb577b335a5f6fddde705c00efe8c33d9",
+      "tags": [],
+      "is_following": false,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    ...
+  ]
+}
+
+Follower State
+/lists/:token_id/:addressOrENS/followerState
+Get the follower state between a given list and a given user.
+
+Path Parameters
+token_id (string): The EFP List of the account
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/encrypteddegen.eth/followerState
+
+// sample response
+{
+  "token_id": "3",
+  "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+  "state": {
+    "follow": true,
+    "block": false,
+    "mute": false
+  }
+}
+
+Following
+/lists/:token_id/following
+Get accounts being followed (excluding blocked and muted) by a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+tags (string, optional): Specifies an array of comma separated tags, of which each account in the response should have at least one.
+sort (string, optional): Specifies how the results should be sorted, possible values ‘latest’, ‘earliest’, ‘followers’. If not specified, default sort is ‘latest’
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/4/following
+
+// sample response
+{
+  "following": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xc6ed8696c4885dcafdc73c5ef28511e02568b472",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x1cbf9983e0d59276a58db8e8529706004fcb1837",
+      "tags": []
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x27d311b8958ca479615522304b442e530c8073fe",
+      "tags": []
+    },
+    ...
+  ]
+}
+
+Recommended
+/lists/:token_id/recommended
+Get recommended users for a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/1/recommended
+
+// sample response
+{
+  "recommended": [
+    {
+      "name": "usersteen.eth",
+      "address": "0x575c8a992ec082f3650432de77c1cbbccf568200",
+      "avatar": "https://euc.li/usersteen.eth",
+      "class": "B",
+      "created_at": "2024-09-18T17:10:24.406Z"
+    },
+    {
+      "name": "furyan.eth",
+      "address": "0x02a2295d86e530045844e25582185c65925b2eb8",
+      "avatar": "https://metadata.ens.domains/mainnet/avatar/furyan.eth",
+      "class": "B",
+      "created_at": "2024-09-18T17:10:24.406Z"
+    },
+    {
+      "name": "shea.eth",
+      "address": "0x1b60a111d39b525cdd2c1669b0257cb00857b33b",
+      "avatar": "https://euc.li/shea.eth",
+      "class": "B",
+      "created_at": "2024-09-18T17:10:24.406Z"
+    },
+    ...
+  ]
+}
+
+Search Followers
+/lists/:token_id/searchFollowers
+Search for followers of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+term (string, optional): Specifies the string to search for in a followers address or ENS name
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/4/searchFollowers?term=crypt
+
+// sample response
+{
+  "followers": [
+    {
+      "efp_list_nft_token_id": "99",
+      "address": "0x19cf388796c31fa7a583270d82659ecd2b4fd490",
+      "ens": {
+        "name": "cryptomandias.eth",
+        "avatar": "https://metadata.ens.domains/mainnet/avatar/cryptomandias.eth"
+      },
+      "tags": [],
+      "is_following": true,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "553",
+      "address": "0x3b30d44df9afffc07a51457e18410c4ca0f90896",
+      "ens": {
+        "name": "cryptodeadbeat.eth",
+        "avatar": "https://euc.li/cryptodeadbeat.eth"
+      },
+      "tags": [],
+      "is_following": true,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "88",
+      "address": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+      "ens": {
+        "name": "efp.encrypteddegen.eth",
+        "avatar": "https://euc.li/efp.encrypteddegen.eth"
+      },
+      "tags": [
+        "top8"
+      ],
+      "is_following": true,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    ...
+  ]
+}
+
+Search Following
+/lists/:token_id/searchFollowing
+Search for following of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+term (string, optional): Specifies the string to search for in a following address or ENS name
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/searchFollowing?term=bran
+
+// sample response
+{
+  "following": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x0ae93a80ef639c07ecf969735c9b3cc90ef6d803",
+      "tags": [],
+      "ens": {
+        "name": "ens.brantly.eth",
+        "avatar": "https://metadata.ens.domains/mainnet/avatar/ens.brantly.eth"
+      }
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xe0308a8a9095e4fc554fefdfafc819ff7b0f7103",
+      "tags": [],
+      "ens": {
+        "name": "libran.eth",
+        "avatar": "https://euc.li/libran.eth"
+      }
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x983110309620d911731ac0932219af06091b6744",
+      "tags": [
+        "top8"
+      ],
+      "ens": {
+        "name": "brantly.eth",
+        "avatar": "https://euc.li/brantly.eth"
+      }
+    }
+  ]
+}
+
+Stats
+/lists/:token_id/stats
+Get stats of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Query Parameters
+live (bool): Specifies whether to calculate stats or return cached values
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/stats?live=true
+
+// sample response
+{
+  "followers_count": "115",
+  "following_count": "569"
+}
+
+Tagged As
+/lists/:token_id/taggedAs
+Get the tags that are applied to a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/41/taggedAs
+
+// sample response
+{
+  "token_id": "41",
+  "tags": [
+    "top8",
+    "block"
+  ],
+  "tagCounts": [
+    {
+      "tag": "top8",
+      "count": 7
+    },
+    {
+      "tag": "block",
+      "count": 1
+    }
+  ],
+  "taggedAddresses": [
+    {
+      "address": "0xf9a24785cab3ed0921c41fb84dedfea935a4ad1b",
+      "tag": "top8"
+    },
+    {
+      "address": "0x8eddf5431f5b31933bfbd8111d54fc6e9456e6c1",
+      "tag": "top8"
+    },
+    {
+      "address": "0x8b24b1686832757e2f6d640e11e88e7f0064594a",
+      "tag": "top8"
+    },
+    {
+      "address": "0x60377ec355857c2d06d1ce28555f624257344b0d",
+      "tag": "top8"
+    },
+    {
+      "address": "0xfa1afc4534fc9f80a552e61dd04cd8a172c821a6",
+      "tag": "top8"
+    },
+    {
+      "address": "0xc808ffa16d6773d6a9109b1ab92e839157eb0954",
+      "tag": "block"
+    },
+    {
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "tag": "top8"
+    },
+    {
+      "address": "0x2a59071ff48936c6838dcac425fa0df6ea5979bf",
+      "tag": "top8"
+    }
+  ]
+}
+
+Tags
+/lists/:token_id/tags
+Get the tags of a user by their EFP list id.
+
+Path Parameters
+token_id (string): The EFP List of the account
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/lists/3/tags
+
+// sample response
+{
+  "token_id": "3",
+  "tags": [
+    "vogu",
+    "top8"
+  ],
+  "tagCounts": [
+    {
+      "tag": "vogu",
+      "count": 1
+    },
+    {
+      "tag": "top8",
+      "count": 8
+    }
+  ],
+  "taggedAddresses": [
+    {
+      "address": "0x0f2e3e67cb000993d07e60261748963d3f4bd6d9",
+      "tag": "vogu"
+    },
+    {
+      "address": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+      "tag": "top8"
+    },
+    {
+      "address": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+      "tag": "top8"
+    },
+    {
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "tag": "top8"
+    },
+    {
+      "address": "0xbe4f0cdf3834bd876813a1037137dcfad79acd99",
+      "tag": "top8"
+    },
+    {
+      "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "tag": "top8"
+    },
+    {
+      "address": "0xd8da6bf26964af9d7eed9e03e53415d37aa96045",
+      "tag": "top8"
+    },
+    {
+      "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+      "tag": "top8"
+    },
+    {
+      "address": "0xeb6b293e9bb1d71240953c8306ad2c8ac523516a",
+      "tag": "top8"
+    }
+  ]
+}
+
+Stats
+/stats
+Get global EFP statistics.
+
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/stats
+
+// sample response
+{
+  "stats": {
+    "address_count": "8999",
+    "list_count": "733",
+    "list_op_count": "50284"
+  }
+}
+
+Image
+/token/image/:token_id
+Get NFT image for a specified token id
+
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/token/image/3
+
+Response
+This endpoint responds with a formatted svg of content-type image/svg+xml;charset=utf-8
+
+Metadata
+/token/metadata/:token_id
+Get NFT metadata for a specified token id
+
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/token/metadata/4
+
+// sample response
+{
+  "name": "EFP List #4",
+  "description": "Ethereum Follow Protocol (EFP) is an onchain social graph protocol for Ethereum accounts.",
+  "image": "https://api.ethfollow.xyz/api/v1/token/image/4",
+  "external_url": "https://testing.ethfollow.xyz/4",
+  "attributes": [
+    {
+      "trait_type": "User",
+      "value": "brantly.eth"
+    },
+    {
+      "trait_type": "Primary List",
+      "value": true
+    },
+    {
+      "trait_type": "Followers",
+      "value": 368
+    },
+    {
+      "trait_type": "Following",
+      "value": 1079
+    },
+    {
+      "trait_type": "Mutuals Rank",
+      "value": "1"
+    },
+    {
+      "trait_type": "Followers Rank",
+      "value": "1"
+    },
+    {
+      "trait_type": "Following Rank",
+      "value": "6"
+    },
+    {
+      "trait_type": "Blocked Rank",
+      "value": "7"
+    }
+  ]
+}
+
+Account
+/users/:addressOrENS/account
+Get account information by Address or ENS Name
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl http://api.ethfollow.xyz/api/v1/users/dr3a.eth/account
+
+// sample response
+{
+  "address": "0xeb6b293e9bb1d71240953c8306ad2c8ac523516a",
+  "ens": {
+    "name": "dr3a.eth",
+    "avatar": "https://avatar-upload.ens-cf.workers.dev/mainnet/dr3a.eth?timestamp=1681787731836",
+    "records": {
+      "avatar": "https://avatar-upload.ens-cf.workers.dev/mainnet/dr3a.eth?timestamp=1681787731836",
+      "com.discord": "dr3a.eth",
+      "com.twitter": "dr3a_eth",
+      "description": "dr3a.eth 💙",
+      "email": "dr3a.eth@skiff.com",
+      "name": "drea",
+      "org.telegram": "dr3adoteth",
+      "url": "https://dr3a.eth.limo"
+    },
+    "updated_at": "2024-09-18T01:54:52.959Z"
+  }
+}
+
+Common Followers
+/users/:addressOrENS/commonFollowers
+Get common followers that are shared by two accounts
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+leader (address, required): Specifies the account whose followers should be compared
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/commonFollowers?leader=0x0312567d78ff0c9ce0bd62a250df5c6474c71334
+
+// sample response
+{
+  "results": [
+    {
+      "address": "0x0312567d78ff0c9ce0bd62a250df5c6474c71334",
+      "name": "pepe.eth",
+      "avatar": "https://preview.redd.it/23tzr9qimgf51.png?auto=webp&s=d5475b2c247d3f3b4c8d9d3d3cae2521e15437ef",
+      "mutuals_rank": "10"
+    },
+    {
+      "address": "0x038b716928a41ea42253ac043af4f8fdcd940098",
+      "name": "aaron.box",
+      "avatar": "https://metadata.ens.domains/mainnet/avatar/aaron.box",
+      "mutuals_rank": "108"
+    },
+    {
+      "address": "0x074470b9a32f68de86fac393a10d5cea01c54269",
+      "name": "pawswap.eth",
+      "avatar": "https://euc.li/pawswap.eth",
+      "mutuals_rank": "18"
+    },
+    {
+      "address": "0x074631095645e426e50b478d40301dd35e74f24c",
+      "name": "pasqui.eth",
+      "avatar": "https://metadata.ens.domains/mainnet/avatar/pasqui.eth",
+      "mutuals_rank": "201"
+    },
+
+    ...
+
+  ],
+  "length": 76
+}
+
+Details
+/users/:addressOrENS/details
+Get account details, populates most of the data on a profile card
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/details
+
+// sample response
+{
+  "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+  "ens": {
+    "name": "0xthrpw.eth",
+    "avatar": "https://euc.li/0xthrpw.eth",
+    "records": {
+      "avatar": "https://euc.li/0xthrpw.eth",
+      "com.github": "0xthrpw",
+      "com.twitter": "0xthrpw",
+      "description": "Took the mirrors off my cadillac because I don't like looking like I look back.",
+      "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+      "name": "throw;"
+    },
+    "updated_at": "2024-09-18T02:12:57.934Z"
+  },
+  "ranks": {
+    "mutuals_rank": "6",
+    "followers_rank": "19",
+    "following_rank": "18",
+    "top8_rank": "12",
+    "blocks_rank": "7"
+  },
+  "primary_list": "3"
+}
+
+ENS
+/users/:addressOrENS/ens
+Get the ENS data of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/brantly.eth/ens
+
+// sample response
+{
+  "ens": {
+    "name": "brantly.eth",
+    "address": "0x983110309620d911731ac0932219af06091b6744",
+    "avatar": "https://euc.li/brantly.eth",
+    "records": {
+      "avatar": "https://euc.li/brantly.eth",
+      "com.discord": "brantly.eth",
+      "com.github": "brantlymillegan",
+      "com.twitter": "brantlymillegan",
+      "description": "Catholic, husband, father | building @efp.eth | ENS (DAO delegate, former core team) | Sign-in with Ethereum (creator)",
+      "email": "me@brantly.xyz",
+      "header": "https://i.imgur.com/Quo06x2.png",
+      "location": "USA",
+      "name": "Brantly Millegan",
+      "org.telegram": "brantlymillegan",
+      "url": "https://ethfollow.xyz/"
+    },
+    "updated_at": "2024-09-18T03:40:58.807Z"
+  }
+}
+
+Followers
+/users/:addressOrENS/followers
+Get followers by Address or ENS Name
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+tags (string, optional): Specifies an array of comma separated tags, of which each account in the response should have at least one.
+sort (string, optional): Specifies how the results should be sorted, possible values ‘latest’, ‘earliest’, ‘followers’. If not specified, default sort is ‘latest’
+Sample Query
+Terminal window
+curl http://api.ethfollow.xyz/api/v1/users/dr3a.eth/followers
+
+// sample response
+{
+  "followers": [
+    {
+      "efp_list_nft_token_id": "611",
+      "address": "0x6251bf215a91b6dc545325bb19c304a47df3cbee",
+      "tags": [],
+      "is_following": false,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "589",
+      "address": "0x41887f140069da8a4f01ad8575fb9ed4e3296c20",
+      "tags": [],
+      "is_following": false,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "557",
+      "address": "0xf07516168b92b4e665db90e632ead8caa47585b5",
+      "tags": [],
+      "is_following": false,
+      "is_blocked": false,
+      "is_muted": false
+    },
+    {
+      "efp_list_nft_token_id": "546",
+      "address": "0x08ceb8bba685ee708c9c4c65576837cbe19b9dea",
+      "tags": [],
+      "is_following": false,
+      "is_blocked": false,
+      "is_muted": false
+    }
+  ]
+}
+
+Follower State
+/users/:addressOrENS/:addressOrENS2/followerState
+Get the follower state between two users.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+addressOrENS2 (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/brantly.eth/followerState
+
+// sample response
+{
+  "addressUser": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+  "addressFollower": "0x983110309620d911731ac0932219af06091b6744",
+  "state": {
+    "follow": true,
+    "block": false,
+    "mute": false
+  }
+}
+
+Following
+/users/:addressOrENS/following
+Get following by Address or ENS Name
+
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/dr3a.eth/following
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+tags (string, optional): Specifies an array of comma separated tags, of which each account in the response should have at least one.
+sort (string, optional): Specifies how the results should be sorted, possible values ‘latest’, ‘earliest’, ‘followers’. If not specified, default sort is ‘latest’
+// sample response
+{
+  "following": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x983110309620d911731ac0932219af06091b6744",
+      "tags": ["efp", "ens"]
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xbdb41bff7e828e2dc2d15eb67257455db818f1dc",
+      "tags": ["efp", "ens"]
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0xf4212614c7fe0b3feef75057e88b2e77a7e23e83",
+      "tags": ["efp"]
+    }
+  ]
+}
+
+List Records
+/users/:addressOrENS/list-records
+Get the list records of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/encrypteddegen.eth/list-records
+
+// sample response
+{
+  "records": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x0116acf39cf70fefc3c23c88a37e59474e8e17be",
+      "tags": null
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x021021ccee934b346160342f8d7f59f514c08c56",
+      "tags": null
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x025376e7e7f161a198fb5fc90a220a553836d11a",
+      "tags": null
+    },
+
+    ...
+  ]
+}
+
+Lists
+/users/:addressOrENS/lists
+Get the lists of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/brantly.eth/lists
+
+// sample response
+{
+  "primary_list": "4",
+  "lists": [
+    "4",
+    "107"
+  ]
+}
+
+Primary List
+/users/:addressOrENS/primary-list
+Get the primary list of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/encrypteddegen.eth/primary-list
+
+// sample response
+{
+  "primary_list": "1"
+}
+
+Recommended
+/users/:addressOrENS/recommended
+Get recommended users for a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/recommended
+
+// sample response
+{
+  "recommended": [
+    {
+      "name": "incarterseyes.eth",
+      "address": "0x5a084aaef5eddd9195f28f6fe056785e01f210eb",
+      "avatar": "https://arweave.net/pAMEFSMLuKfdBE4RX2HQd7l_TblPkqS8GIt7cOy8Bb0",
+      "class": "B",
+      "created_at": "2024-09-18T03:45:36.490Z"
+    },
+    {
+      "name": "occ.eth",
+      "address": "0x66d9640783719c13d6a106924000bc6153661a97",
+      "avatar": "https://euc.li/occ.eth",
+      "class": "C",
+      "created_at": "2024-09-18T03:45:36.490Z"
+    },
+    {
+      "name": "aaronjmars.eth",
+      "address": "0x0000ce08fa224696a819877070bf378e8b131acf",
+      "avatar": "https://ens.xyz/aaronjmars.eth",
+      "class": "C",
+      "created_at": "2024-09-18T03:45:36.490Z"
+    },
+
+    ...
+}
+
+Search Followers
+/users/:addressOrENS/searchFollowers
+Search for followers of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+term (string, optional): Specifies the string to search for in a followers address or ENS name
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/searchFollowers?term=brant
+
+// sample response
+{
+  "followers": [
+    {
+      "efp_list_nft_token_id": "4",
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "ens": {
+        "name": "brantly.eth",
+        "avatar": "https://euc.li/brantly.eth"
+      },
+      "tags": [],
+      "is_following": true,
+      "is_blocked": false,
+      "is_muted": false
+    }
+  ]
+}
+
+Search Following
+/users/:addressOrENS/searchFollowing
+Search for following of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+limit (number, optional): Specifies the amount of records to return in the response. If not specifed, default value is 10.
+offset (number, optional): Specifies the starting index of the records to return in the response. If not specifed, default value is 0.
+term (string, optional): Specifies the string to search for in a following address or ENS name
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/searchFollowing?term=degen
+
+// sample response
+{
+  "following": [
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x96053204967c30079529adddc56f6a37380205af",
+      "tags": [],
+      "ens": {
+        "name": "alphadegen.eth",
+        "avatar": "https://bafybeiaqof5u4bj57t36pt2t7egerky6epvutg7yb4suljnnjuqboymhvi.ipfs.dweb.link/af1f0c19f22c6ee0ea9a9e5f89d585df1ab8c677ef0ef7f0a448cce0fef21a71.png"
+      }
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x69207d197063c6b207ff206fdba916e1700d60fa",
+      "tags": [],
+      "ens": {
+        "name": "degenfam.eth",
+        "avatar": "https://codemakes.art/image/quasars/2631"
+      }
+    },
+    {
+      "version": 1,
+      "record_type": "address",
+      "data": "0x70bb434ea7b7f14709ed0dd17cc54056812cf4ad",
+      "tags": [],
+      "ens": {
+        "name": "teradegen.eth",
+        "avatar": "https://metadata.ens.domains/mainnet/avatar/teradegen.eth"
+      }
+    },
+}
+
+Stats
+/users/:addressOrENS/stats
+Get stats of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Query Parameters
+live (bool): Specifies whether to calculate stats or return cached values
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/limes.eth/stats
+
+// sample response
+{
+  "followers_count": "104",
+  "following_count": "26"
+}
+
+Tagged As
+/users/:addressOrENS/taggedAs
+Get the tags that are applied to a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/0xthrpw.eth/taggedAs
+
+// sample response
+{
+  "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+  "tags": [
+    "top8"
+  ],
+  "tagCounts": [
+    {
+      "tag": "top8",
+      "count": 5
+    }
+  ],
+  "taggedAddresses": [
+    {
+      "address": "0x5a3bf42028901447434d12c5459954e667e5c518",
+      "tag": "top8"
+    },
+    {
+      "address": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+      "tag": "top8"
+    },
+    {
+      "address": "0x8eddf5431f5b31933bfbd8111d54fc6e9456e6c1",
+      "tag": "top8"
+    },
+    {
+      "address": "0xfa1afc4534fc9f80a552e61dd04cd8a172c821a6",
+      "tag": "top8"
+    },
+    {
+      "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "tag": "top8"
+    }
+  ]
+}
+
+Tags
+/users/:addressOrENS/tags
+Get the tags of a user by their address or ENS name.
+
+Path Parameters
+addressOrENS (string): The address or ENS name of the account.
+Sample Query
+Terminal window
+curl https://api.ethfollow.xyz/api/v1/users/brantly.eth/tags
+
+// sample response
+{
+  "address": "0x983110309620d911731ac0932219af06091b6744",
+  "tags": [
+    "top8",
+    "block",
+    "degen"
+  ],
+  "tagCounts": [
+    {
+      "tag": "top8",
+      "count": 8
+    },
+    {
+      "tag": "block",
+      "count": 2
+    },
+    {
+      "tag": "degen",
+      "count": 4
+    }
+  ],
+  "taggedAddresses": [
+    {
+      "address": "0x44a3a18df15ae79bbc6c660db59428fe9a181864",
+      "tag": "top8"
+    },
+    {
+      "address": "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+      "tag": "block"
+    },
+    {
+      "address": "0x4d982788c01402c4e0f657e1192d7736084ae5a8",
+      "tag": "degen"
+    },
+    {
+      "address": "0x60377ec355857c2d06d1ce28555f624257344b0d",
+      "tag": "top8"
+    },
+
+    ...
+  ]
+}
