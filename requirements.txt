@@ -4,3 +4,4 @@
    tqdm==4.62.3
    deepdiff==5.7.0
    schedule==1.1.0
+   backoff==2.2.1
