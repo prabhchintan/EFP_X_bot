@@ -12,7 +12,7 @@ client = tweepy.Client(
 )
 
 try:
-    response = client.create_tweet(text="Test tweet from Python")
+    response = client.create_tweet(text="Test tweet from Python!")
     print(f"Tweet posted successfully! Tweet ID: {response.data['id']}")
 except Exception as e:
     print(f"Error posting tweet: {e}")
