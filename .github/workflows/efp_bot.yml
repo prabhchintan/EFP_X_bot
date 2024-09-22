@@ -8,6 +8,7 @@ on:
 jobs:
   run_efp_bot:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # Set a 15-minute timeout
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -30,10 +31,7 @@ jobs:
         TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
         TWITTER_ACCESS_TOKEN: ${{ secrets.TWITTER_ACCESS_TOKEN }}
         TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-      run: |
-        python efp_bot.py &
-        sleep 7h  # Allow the script to run for 7 hours
-        kill $!  # Terminate the script after 7 hours
+      run: python efp_bot.py
     
     - name: Commit and push if changes
       run: |

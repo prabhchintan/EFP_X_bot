@@ -4,12 +4,11 @@ import tweepy
 import os
 import logging
 import time
-import schedule
+import random
 from dotenv import load_dotenv
 from tqdm import tqdm
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import backoff
-from collections import deque
 
 # Load environment variables
 load_dotenv()
@@ -31,9 +30,30 @@ twitter_client = tweepy.Client(
 # Constants
 MAX_WORKERS = 10
 MAX_RETRIES = 3
-MAX_TWEETS_PER_RUN = 15  # Increased from 5 to 15
-TWEET_QUEUE_FILE = 'tweet_queue.json'
-TWEET_INTERVAL_MINUTES = 20  # Post a tweet every 20 minutes
+MAX_TWEETS_PER_RUN = 15
+
+# Ethereum-aligned lingo
+ETH_INTROS = [
+    "🚀 Ether-nauts, buckle up! The @efp gossip machine is hotter than a freshly minted NFT! 🔥",
+    "🌠 Cosmic shift in the Ethereum social sphere! @efp's got tea spicier than a failed hard fork! ☕️",
+    "🎭 Drama in the decentralized social scene! @efp's dishing out goss faster than Vitalik tweets! 🍿",
+    "🌈 Rainbows and unicorns in @efp land! Who's causing more buzz than an ETH2 upgrade? 🦄",
+    "💥 ETH socialites making waves! @efp's got the 411 hotter than gas fees on NFT drop day! 🌊"
+]
+
+ETH_ACTIONS = {
+    "new_user": ["just ape'd into @efp faster than you can say 'gas war'", "emerged from the ETH mist on @efp like a shiny new altcoin", "materialized in the @efp metaverse, ready to farm some social yield"],
+    "created_list": ["birthed a shiny new @efp list, bullish on their curation skills!", "conjured up an @efp list from the ether, it's giving 'alpha leak' vibes"],
+    "list_change": ["went on an @efp list-creating frenzy, more lists than a DAO has governance proposals", "summoned a bunch of new @efp lists, collecting accounts like they're rare NFTs"],
+    "follower_change": ["is attracting ETH whales on @efp like it's ICO season all over again", "just had their @efp follower count go more parabolic than ETH's price chart"],
+    "significant_follow": ["just added some ETH royalty to their @efp following, bullish on their networking skills", "is now keeping tabs on the crème de la crème of @efp, major alpha alert!"],
+    "unfollow": ["just purged their @efp following faster than a paper hands selling the dip", "went on an @efp unfollowing spree, bear market for their social graph?"],
+    "block": ["just deployed some @efp blocks, building walls higher than post-merge gas fees", "fortified their @efp castle walls, no FUD getting through here"],
+    "mute": ["hit the magical @efp mute button, silencing more noise than a layer 2 solution", "cast a silence spell on some @efp accounts, peace restored faster than a quick block confirmation"],
+    "rank_change": ["just moonshot into the @efp top 20, time to change their Twitter bio?", "leveled up to @efp crypto influencer status, incoming sponsored posts in 3... 2... 1..."],
+    "ens_change": ["got a fresh @efp ENS makeover, looking more unique than a rare Cryptopunk", "rebranded their @efp digital identity, bullish on their personal token"],
+    "account_change": ["gave their @efp profile a glow-up brighter than the ETH beacon chain", "polished their @efp digital presence, looking more slick than a DEX interface after a UX upgrade"]
+}
 
 def load_config():
     with open('config.json', 'r') as f:
@@ -58,17 +78,6 @@ def save_state(state):
     with open('initial_state.json', 'w') as f:
         json.dump(state, f, indent=2)
 
-def load_tweet_queue():
-    try:
-        with open(TWEET_QUEUE_FILE, 'r') as f:
-            return deque(json.load(f), maxlen=100)
-    except FileNotFoundError:
-        return deque(maxlen=100)
-
-def save_tweet_queue(queue):
-    with open(TWEET_QUEUE_FILE, 'w') as f:
-        json.dump(list(queue), f)
-
 @backoff.on_exception(backoff.expo, requests.RequestException, max_tries=MAX_RETRIES)
 def get_endpoint_data(user, endpoint, params=None):
     url = f"{EFP_API_BASE}/users/{user}/{endpoint}"
@@ -89,7 +98,7 @@ def get_paginated_data(user, endpoint):
             offset += limit
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 404:
-                logging.warning(f"404 Not Found for user {user} at paginated endpoint {endpoint}")
+                logging.warning(f"404 Not Found for user {user} at paginated endpoint {endpoint}. Did they rug pull their account?")
                 return None
             raise
     return all_data
@@ -112,9 +121,9 @@ def get_user_data(user):
             try:
                 data = future.result()
                 user_data[endpoint] = data
-                logging.info(f"Successfully fetched {endpoint} data for {user}")
+                logging.info(f"Successfully fetched {endpoint} data for {user}. It's like finding a diamond in the blockchain!")
             except Exception as e:
-                logging.error(f"Error fetching {endpoint} for {user}: {e}")
+                logging.error(f"Error fetching {endpoint} for {user}: {e}. Looks like their data is more elusive than a rare NFT!")
                 user_data[endpoint] = None
 
     return user_data if all(user_data.values()) else None
@@ -126,7 +135,7 @@ def detect_changes(old_data, new_data):
         return changes
     
     if old_data is None:
-        changes.append(("new_user", "just joined @efp"))
+        changes.append(("new_user", random.choice(ETH_ACTIONS["new_user"])))
         return changes
     
     if new_data is None:
@@ -136,16 +145,16 @@ def detect_changes(old_data, new_data):
     old_lists = old_data.get('lists', {}).get('lists', [])
     new_lists = new_data.get('lists', {}).get('lists', [])
     if not old_lists and new_lists:
-        changes.append(("created_list", f"created their first @efp list '{new_lists[0]['name']}'"))
+        changes.append(("created_list", f"{random.choice(ETH_ACTIONS['created_list'])} '{new_lists[0]['name']}'"))
     elif len(new_lists) - len(old_lists) >= LIST_CHANGE_THRESHOLD:
-        changes.append(("list_change", f"created {len(new_lists) - len(old_lists)} new @efp lists"))
+        changes.append(("list_change", f"{random.choice(ETH_ACTIONS['list_change'])} ({len(new_lists) - len(old_lists)} new lists)"))
     
     # Check for significant follower changes
     old_followers = old_data.get('stats', {}).get('followers', 0)
     new_followers = new_data.get('stats', {}).get('followers', 0)
     follower_change = new_followers - old_followers
     if abs(follower_change) >= FOLLOWER_CHANGE_THRESHOLD:
-        changes.append(("follower_change", f"{'gained' if follower_change > 0 else 'lost'} {abs(follower_change)} @efp followers"))
+        changes.append(("follower_change", f"{random.choice(ETH_ACTIONS['follower_change'])} ({follower_change:+d} followers)"))
     
     # Check for significant following changes
     old_following = set(f['data'] for f in old_data.get('allFollowing', []))
@@ -156,106 +165,71 @@ def detect_changes(old_data, new_data):
     # Check for significant follows (people from watchlist)
     significant_follows = [user for user in followed if user in WATCHLIST]
     if significant_follows:
-        changes.append(("significant_follow", f"started following {', '.join(significant_follows)} on @efp"))
+        changes.append(("significant_follow", f"{random.choice(ETH_ACTIONS['significant_follow'])} (Added: {', '.join(significant_follows)})"))
     
     # Check for unfollows
     if len(unfollowed) >= FOLLOWING_CHANGE_THRESHOLD:
-        changes.append(("unfollow", f"unfollowed {len(unfollowed)} accounts on @efp"))
+        changes.append(("unfollow", f"{random.choice(ETH_ACTIONS['unfollow'])} ({len(unfollowed)} accounts)"))
     
     # Check for blocks
     old_blocks = set(f['data'] for f in old_data.get('allFollowing', []) if 'block' in f.get('tags', []))
     new_blocks = set(f['data'] for f in new_data.get('allFollowing', []) if 'block' in f.get('tags', []))
     blocked = new_blocks - old_blocks
     if blocked:
-        changes.append(("block", f"blocked {len(blocked)} accounts on @efp"))
+        changes.append(("block", f"{random.choice(ETH_ACTIONS['block'])} ({len(blocked)} accounts)"))
     
     # Check for mutes
     old_mutes = set(f['data'] for f in old_data.get('allFollowing', []) if 'mute' in f.get('tags', []))
     new_mutes = set(f['data'] for f in new_data.get('allFollowing', []) if 'mute' in f.get('tags', []))
     muted = new_mutes - old_mutes
     if muted:
-        changes.append(("mute", f"muted {len(muted)} accounts on @efp"))
+        changes.append(("mute", f"{random.choice(ETH_ACTIONS['mute'])} ({len(muted)} accounts)"))
     
     # Check for rank changes
     old_rank = old_data.get('details', {}).get('ranks', {}).get('mutuals_rank')
     new_rank = new_data.get('details', {}).get('ranks', {}).get('mutuals_rank')
     if old_rank and new_rank and int(old_rank) > 20 and int(new_rank) <= 20:
-        changes.append(("rank_change", f"just entered the top 20 @efp ranks"))
+        changes.append(("rank_change", random.choice(ETH_ACTIONS['rank_change'])))
     
     # Check for ENS changes
     old_ens = old_data.get('ens', {})
     new_ens = new_data.get('ens', {})
     if old_ens != new_ens:
-        changes.append(("ens_change", "updated their ENS data"))
+        changes.append(("ens_change", random.choice(ETH_ACTIONS['ens_change'])))
 
     # Check for account changes
     old_account = old_data.get('account', {})
     new_account = new_data.get('account', {})
     if old_account != new_account:
-        changes.append(("account_change", "refreshed their @efp profile"))
+        changes.append(("account_change", random.choice(ETH_ACTIONS['account_change'])))
 
     return changes
 
-def generate_summary_tweet(all_changes):
-    if not all_changes:
-        return None
-
-    # Sort changes by priority (number of changes) and select the top user
-    prioritized_changes = sorted(all_changes, key=lambda x: len(x[1]), reverse=True)
-    top_user, top_changes = prioritized_changes[0]
-
-    intro = "🚀 @efp Update Alert! 🚀"
-    body = f"{top_user} is making moves: {', '.join([c[1] for c in top_changes[:3]])}"
-    
-    if len(prioritized_changes) > 1:
-        other_users = [user for user, _ in prioritized_changes[1:4]]
-        outro = f"Also watch: {', '.join(other_users)}"
-    else:
-        outro = "Stay tuned for more @efp action! 👀"
-    
-    tweet = f"{intro}\n\n{body}\n\n{outro}\n\nhttps://testing.ethfollow.xyz/{top_user}"
-    
-    return tweet[:280]  # Twitter character limit
-
-def post_tweet(message):
+def post_individual_tweet(tweet):
     try:
-        response = twitter_client.create_tweet(text=message)
-        logging.info(f"Tweet posted successfully! Tweet ID: {response.data['id']}")
+        response = twitter_client.create_tweet(text=tweet)
+        logging.info(f"Tweet posted successfully! Tweet ID: {response.data['id']}. It's live on the blockchain... err, Twitter!")
+        time.sleep(60)  # Wait a minute between tweets to avoid rate limiting
     except Exception as e:
-        logging.error(f"Error posting tweet: {e}")
+        logging.error(f"Error posting tweet: {e}. Looks like our transaction... err, tweet got rejected!")
 
-def calculate_priority(change):
-    # Implement a priority calculation based on the type and significance of the change
-    # This is a simple example; you may want to adjust based on your specific needs
-    priority_map = {
-        "new_user": 10,
-        "created_list": 8,
-        "significant_follow": 7,
-        "follower_change": 6,
-        "rank_change": 5,
-        "list_change": 4,
-        "unfollow": 3,
-        "block": 2,
-        "mute": 1,
-        "ens_change": 1,
-        "account_change": 1
-    }
-    return sum(priority_map.get(c[0], 0) for c in change[1])
-
-def staggered_tweet_posting(tweet_queue):
-    if tweet_queue:
-        tweet = tweet_queue.popleft()
-        post_tweet(tweet)
-        save_tweet_queue(tweet_queue)
-        logging.info(f"Posted tweet. Remaining in queue: {len(tweet_queue)}")
+def generate_individual_tweets(all_changes):
+    tweets = []
+    for user, changes in all_changes:
+        intro = random.choice(ETH_INTROS)
+        action = random.choice([c[1] for c in changes])
+        tweet = f"{intro}\n\n🧙‍♂️ {user} {action}\n\nCatch all the @efp action at https://testing.ethfollow.xyz/{user} 🍿"
+        tweets.append(tweet[:280])  # Ensure we don't exceed Twitter's character limit
+        if len(tweets) == MAX_TWEETS_PER_RUN:
+            break
+    return tweets
 
 def main():
     start_time = time.time()
     state = load_state()
-    tweet_queue = load_tweet_queue()
     
     if not state:
-        logging.error("No state loaded. Exiting.")
+        logging.error("No state loaded. Exiting faster than a panic sell!")
         return
 
     # Process all users in the state
@@ -265,13 +239,17 @@ def main():
     all_changes = []
     failing_users = set()
     
-    for user in tqdm(users_to_process, desc="Processing users"):
+    for user in tqdm(users_to_process, desc="Stalking ETH accounts"):
+        if time.time() - start_time > 800:  # Stop processing after ~13 minutes
+            logging.warning("Time limit approaching. Wrapping up the gossip session faster than a quick block confirmation!")
+            break
+        
         user_start_time = time.time()
         old_data = state[user]
         new_data = get_user_data(user)
         
         if new_data is None:
-            logging.warning(f"Failed to fetch data for {user}")
+            logging.warning(f"Failed to fetch data for {user}. They've gone darker than a bear market!")
             failing_users.add(user)
             updated_state[user] = old_data
         else:
@@ -279,46 +257,30 @@ def main():
             if changes:
                 all_changes.append((user, changes))
                 updated_state[user] = new_data
-                logging.info(f"Changes detected for {user}: {', '.join([c[1] for c in changes])}")
+                logging.info(f"Changes detected for {user}: {', '.join([c[1] for c in changes])}. It's like watching a live trading chart!")
             else:
                 updated_state[user] = new_data
-                logging.info(f"No changes detected for {user}")
+                logging.info(f"No changes detected for {user}. HODLing steady!")
         
         user_time = time.time() - user_start_time
-        logging.info(f"Processed {user} in {user_time:.2f} seconds")
+        logging.info(f"Processed {user} in {user_time:.2f} seconds. Faster than you can say 'gas fees'!")
     
     # Update state for all users
     state.update(updated_state)
     save_state(state)
     
-    # Generate tweets and add to queue
-    for user, changes in all_changes:
-        tweet = generate_summary_tweet([(user, changes)])
-        if tweet:
-            tweet_queue.append(tweet)
-    
-    # Sort tweet queue by priority
-    tweet_queue = deque(sorted(tweet_queue, key=lambda x: calculate_priority(x), reverse=True))
-    
-    # Schedule staggered tweet posting
-    for _ in range(min(len(tweet_queue), MAX_TWEETS_PER_RUN)):
-        schedule.every(TWEET_INTERVAL_MINUTES).minutes.do(staggered_tweet_posting, tweet_queue)
-    
-    # Run scheduled tasks for the next few hours
-    end_time = time.time() + 7 * 3600  # Run for 7 hours
-    while time.time() < end_time:
-        schedule.run_pending()
-        time.sleep(60)  # Check every minute
-    
-    save_tweet_queue(tweet_queue)
+    # Generate and post individual tweets
+    if all_changes:
+        tweets = generate_individual_tweets(all_changes)
+        for tweet in tweets:
+            post_individual_tweet(tweet)
     
     total_time = time.time() - start_time
-    logging.info(f"Total execution time: {total_time:.2f} seconds")
-    logging.info(f"Processed {len(users_to_process)} users")
-    logging.info(f"Remaining in tweet queue: {len(tweet_queue)}")
+    logging.info(f"Total execution time: {total_time:.2f} seconds. We're faster than a Solana transaction... wait, is that a compliment?")
+    logging.info(f"Processed {len(updated_state)} users. That's more accounts than a crypto mixer!")
 
     if failing_users:
-        logging.warning(f"Users with consistently failing data: {', '.join(failing_users)}")
+        logging.warning(f"Users with consistently failing data (probably just paper hands): {', '.join(failing_users)}")
 
 if __name__ == "__main__":
     main()
