@@ -36,10 +36,15 @@ Before your bot can run wild, it needs to learn the basics:
 The `config.json` file is like your bot's mood ring. It contains:
 
 - `watchlist`: The bot's VIP list of Ethereum accounts to stalk... er, monitor
+- `check_interval_hours`: How often the bot wakes up for its crypto gossip session (aligned with GitHub Actions)
 - `significant_follower_change`: When to get excited about follower count changes
 - `significant_following_change`: When to gossip about following count changes
 - `significant_list_change`: When to spill the tea about changes in lists
 - `significant_tag_change`: When to buzz about changes in tags
+- `max_tweets_per_run`: The bot's tweet limit per gossip session (we don't want it to be too chatty!)
+- `tweet_interval_minutes`: How long the bot waits between tweets (it's all about the suspense)
+
+Adjust these values to fine-tune your bot's chattiness and sensitivity to the ever-changing world of Ethereum social dynamics!
 
 ## 🔐 Protecting API Keys (Because We're Not About That Public Life)
 
