@@ -2,7 +2,7 @@ import requests
 import json
 import logging
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
 from tqdm import tqdm
 import backoff
 
@@ -23,9 +23,12 @@ def load_config():
     return config['watchlist']
 
 @backoff.on_exception(backoff.expo, requests.RequestException, max_tries=MAX_RETRIES)
+def make_request(url):
+    return requests.get(url, timeout=30)  # Increased timeout to 30 seconds
+
 def get_endpoint_data(user, endpoint):
     url = f"{EFP_API_BASE}/users/{user}/{endpoint}"
-    response = requests.get(url)
+    response = make_request(url)
     if response.status_code == 404:
         logging.warning(f"404 Not Found for user {user} at endpoint {endpoint}")
         return endpoint, None
@@ -38,7 +41,7 @@ def get_paginated_data(user, endpoint):
     limit = 100  # Adjust based on API limits
     while True:
         url = f"{EFP_API_BASE}/users/{user}/{endpoint}?offset={offset}&limit={limit}"
-        response = requests.get(url)
+        response = make_request(url)
         if response.status_code == 404:
             logging.warning(f"404 Not Found for user {user} at paginated endpoint {endpoint}")
             return endpoint, None
@@ -50,6 +53,7 @@ def get_paginated_data(user, endpoint):
     return endpoint, all_data
 
 def get_user_data(user):
+    logging.info(f"Starting to fetch data for {user}")
     user_data = {}
     endpoints = ['details', 'stats', 'lists', 'following', 'ens', 'account']
 
@@ -61,6 +65,8 @@ def get_user_data(user):
         future_to_endpoint[executor.submit(get_paginated_data, user, 'following')] = 'following'
 
         for future in as_completed(future_to_endpoint):
+            endpoint = future_to_endpoint[future]
+            logging.info(f"Fetching {endpoint} data for {user}")
             endpoint, data = future.result()
             if data is not None:
                 user_data[endpoint] = data
@@ -68,6 +74,7 @@ def get_user_data(user):
             else:
                 logging.warning(f"Failed to fetch {endpoint} data for {user}")
 
+    logging.info(f"Finished fetching data for {user}")
     return user, user_data
 
 def validate_user_data(user_data):
@@ -79,21 +86,46 @@ def save_state(state, filename='initial_state.json'):
         json.dump(state, f, indent=2)
     logging.info(f"State saved to {filename}")
 
+def save_partial_progress(initial_state, processed_users):
+    with open('partial_state.json', 'w') as f:
+        json.dump(initial_state, f)
+    with open('processed_users.txt', 'w') as f:
+        f.write('\n'.join(processed_users))
+
+def load_partial_progress():
+    try:
+        with open('partial_state.json', 'r') as f:
+            initial_state = json.load(f)
+        with open('processed_users.txt', 'r') as f:
+            processed_users = set(f.read().splitlines())
+        return initial_state, processed_users
+    except FileNotFoundError:
+        return {}, set()
+
 def main():
+    initial_state, processed_users = load_partial_progress()
     watchlist = load_config()
-    initial_state = {}
+    remaining_users = [user for user in watchlist if user not in processed_users]
     failing_users = set()
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_user = {executor.submit(get_user_data, user): user for user in watchlist}
-        for future in tqdm(as_completed(future_to_user), total=len(watchlist), desc="Fetching user data"):
-            user, data = future.result()
-            if data and validate_user_data(data):
-                initial_state[user] = data
-                logging.info(f"Successfully processed data for {user}")
-            else:
+        future_to_user = {executor.submit(get_user_data, user): user for user in remaining_users}
+        for future in tqdm(as_completed(future_to_user), total=len(remaining_users), desc="Fetching user data"):
+            user = future_to_user[future]
+            try:
+                data = future.result(timeout=60)  # Set a 60-second timeout for each user
+                if data and validate_user_data(data[1]):
+                    initial_state[user] = data[1]
+                    logging.info(f"Successfully processed data for {user}")
+                else:
+                    failing_users.add(user)
+                    logging.warning(f"Failed to fetch complete data for user {user}")
+            except TimeoutError:
                 failing_users.add(user)
-                logging.warning(f"Failed to fetch complete data for user {user}")
+                logging.error(f"Timeout while fetching data for user {user}")
+            
+            processed_users.add(user)
+            save_partial_progress(initial_state, processed_users)
 
     if initial_state:
         save_state(initial_state)
