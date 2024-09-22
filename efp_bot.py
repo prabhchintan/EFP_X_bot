@@ -246,7 +246,7 @@ def main():
     failing_users = set()
     
     for user in tqdm(users_to_process, desc="Stalking ETH accounts"):
-        if time.time() - start_time > 800:  # Stop processing after ~13 minutes
+        if time.time() - start_time > 1740:  # Stop processing after ~29 minutes
             logging.warning("Time limit approaching. Wrapping up the gossip session faster than a quick block confirmation!")
             break
         
