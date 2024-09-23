@@ -1,5 +1,5 @@
 {
-    "watchlist": [
+  "watchlist": [
       "brantly.eth",
       "0xthrpw.eth",
       "encrypteddegen.eth",
@@ -274,22 +274,21 @@
       "geet.eth",
       "ricmoo.eth",
       "randhawa.eth"
-    ],
-    "check_interval_hours": 1,
-    "significant_follower_change": 50,
-    "significant_following_change": 25,
-    "significant_list_change": 1,
-    "significant_tag_change": 2,
-    "max_tweets_per_day": 50,
-    "tweet_interval_minutes": 5,
-    "tweet_thresholds": {
+  ],
+  "check_interval_hours": 1,
+  "significant_follower_change": 5,
+  "significant_following_change": 10,
+  "significant_list_change": 1,
+  "significant_tag_change": 2,
+  "tweet_interval_minutes": 5,
+  "tweet_thresholds": {
       "new_user": 1,
       "created_list": 1,
       "list_change": 1,
       "follower_change": 1,
       "significant_follow": 1,
-      "unfollow": 3,
+      "unfollow": 1,
       "block": 1,
-      "mute": 2
-    }
+      "mute": 1
+  }
 }

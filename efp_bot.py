@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 import backoff
 from requests.exceptions import Timeout, RequestException
-from datetime import datetime, timedelta
+from datetime import datetime
 
 # Load environment variables
 load_dotenv()
@@ -49,23 +49,6 @@ def load_state():
 def save_state(state):
     with open('initial_state.json', 'w') as f:
         json.dump(state, f, indent=2)
-
-def load_tweet_count():
-    file_path = 'tweet_count.json'
-    if not os.path.exists(file_path):
-        return {'date': datetime.now().isoformat(), 'count': 0}
-    try:
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-            if datetime.fromisoformat(data['date']).date() < datetime.now().date():
-                return {'date': datetime.now().isoformat(), 'count': 0}
-            return data
-    except json.JSONDecodeError:
-        return {'date': datetime.now().isoformat(), 'count': 0}
-
-def save_tweet_count(tweet_count):
-    with open('tweet_count.json', 'w') as f:
-        json.dump(tweet_count, f)
 
 @backoff.on_exception(backoff.expo, (RequestException, Timeout), max_tries=MAX_RETRIES)
 def get_endpoint_data(endpoint, params=None):
@@ -196,46 +179,42 @@ def get_emoji_for_change_type(change_type):
     }
     return emoji_map.get(change_type, '')
 
-def can_tweet(tweet_count):
-    current_date = datetime.now().date()
-    count_date = datetime.fromisoformat(tweet_count['date']).date()
-    if current_date > count_date:
-        tweet_count['date'] = current_date.isoformat()
-        tweet_count['count'] = 0
-    return tweet_count['count'] < CONFIG['max_tweets_per_day']
-
-def post_tweet(tweet, tweet_count):
-    if can_tweet(tweet_count):
-        try:
-            response = twitter_client.create_tweet(text=tweet)
-            logging.info(f"Tweet posted successfully! Tweet ID: {response.data['id']}")
-            tweet_count['count'] += 1
-            save_tweet_count(tweet_count)
-        except Exception as e:
-            logging.error(f"Error posting tweet: {e}")
-    else:
-        logging.warning("Daily tweet limit reached. Skipping tweet.")
+def post_tweet(tweet):
+    try:
+        response = twitter_client.create_tweet(text=tweet)
+        logging.info(f"Tweet posted successfully! Tweet ID: {response.data['id']}")
+    except Exception as e:
+        logging.error(f"Error posting tweet: {e}")
 
 def generate_tweet(highlights, other_changes):
+    if not highlights:
+        return generate_no_activity_tweets()
+    
     emoji, user, main_change = highlights[0]
-    tweet = f"{emoji} @efp: {user} {main_change}"
+    tweet1 = f"{emoji} @efp: {user} {main_change}"
     
     if len(highlights) > 1:
         emoji2, user2, change2 = highlights[1]
-        tweet += f"\n{emoji2} {user2} {change2}"
+        tweet1 += f"\n{emoji2} {user2} {change2}"
     
-    if other_changes:
-        tweet += "\n\nOther updates:"
-        for _, user, change in other_changes[:3]:  # Limit to 3 other changes
-            tweet += f"\n• {user}: {change}"
+    tweet1 += f"\n\nMore at {EFP_URL_BASE}"
     
-    tweet += f"\n\nMore at {EFP_URL_BASE}"
-    return tweet[:280]  # Ensure we don't exceed Twitter's character limit
+    tweet2 = "Other updates:"
+    for _, user, change in other_changes[:3]:  # Limit to 3 other changes
+        tweet2 += f"\n• {user}: {change}"
+    
+    tweet2 += f"\n\nMore at {EFP_URL_BASE}"
+    
+    return tweet1[:280], tweet2[:280]  # Ensure we don't exceed Twitter's character limit
+
+def generate_no_activity_tweets():
+    tweet1 = "No notable activity detected for the monitored accounts."
+    tweet2 = "Stay tuned for more updates!"
+    return tweet1[:280], tweet2[:280]
 
 def main():
     start_time = time.time()
     state = load_state()
-    tweet_count = load_tweet_count()
     
     if not state:
         logging.error("No state loaded. Exiting.")
@@ -281,17 +260,19 @@ def main():
     if all_changes:
         highlights = all_changes[:2]  # Select top 2 changes as highlights
         other_changes = all_changes[2:]
-        tweet = generate_tweet(highlights, other_changes)
-        post_tweet(tweet, tweet_count)
+        tweet1, tweet2 = generate_tweet(highlights, other_changes)
+        post_tweet(tweet1)
+        post_tweet(tweet2)
     else:
-        logging.info("No changes detected for any users")
+        tweet1, tweet2 = generate_no_activity_tweets()
+        post_tweet(tweet1)
+        post_tweet(tweet2)
     
     total_time = time.time() - start_time
     logging.info(f"Total execution time: {total_time:.2f} seconds")
     logging.info(f"Total users in watchlist: {len(WATCHLIST)}")
     logging.info(f"Users processed: {len(updated_state)}")
     logging.info(f"Users with consistently failing data: {len(failing_users)}")
-    logging.info(f"Tweets posted today: {tweet_count['count']}/{CONFIG['max_tweets_per_day']}")
 
     if failing_users:
         logging.warning(f"Users with consistently failing data: {', '.join(failing_users)}")
