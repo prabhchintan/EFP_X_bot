@@ -275,11 +275,19 @@
       "ricmoo.eth",
       "randhawa.eth"
     ],
-    "check_interval_hours": 8,
+    "check_interval_hours": 2,
     "significant_follower_change": 10,
     "significant_following_change": 5,
     "significant_list_change": 5,
     "significant_tag_change": 3,
     "max_tweets_per_run": 15,
-    "tweet_interval_minutes": 20
+    "max_tweets_per_month": 1450,
+    "tweet_interval_minutes": 5,
+    "tweet_thresholds": {
+      "created_list": 1,
+      "block": 1,
+      "significant_follow": 1,
+      "unfollow": 3,
+      "mute": 2
+    }
   }

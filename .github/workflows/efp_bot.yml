@@ -1,14 +1,14 @@
-name: EFP Bot Run Every 12 Hours
+name: EFP Bot Run Every 2 Hours
 
 on:
   schedule:
-    - cron: '0 */12 * * *'  # This runs every 12 hours (at 00:00 and 12:00 UTC)
+    - cron: '0 */2 * * *'  # This runs every 2 hours
   workflow_dispatch:  # This allows manual triggering
 
 jobs:
   run_efp_bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 30  # Set a 30-minute timeout
+    timeout-minutes: 110  # Set a 110-minute timeout (just under 2 hours)
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4.1.7
@@ -38,4 +38,4 @@ jobs:
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
         git add .
-        git diff --quiet && git diff --staged --quiet || (git commit -m "12-hourly update from GitHub Actions" && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "2-hourly update from GitHub Actions" && git push)
