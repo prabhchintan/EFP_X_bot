@@ -57,7 +57,7 @@ def load_tweet_count():
     try:
         with open(file_path, 'r') as f:
             data = json.load(f)
-            if datetime.fromisoformat(data['date']) < datetime.now().date():
+            if datetime.fromisoformat(data['date']).date() < datetime.now().date():
                 return {'date': datetime.now().isoformat(), 'count': 0}
             return data
     except json.JSONDecodeError:

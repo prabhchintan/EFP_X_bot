@@ -7,7 +7,7 @@ Welcome to the coolest bot on the block! This little dynamo is obsessed with the
 - 🕵️‍♂️ Stalks (ahem, "monitors") a customizable list of Ethereum accounts via the EFP API
 - 📊 Tracks changes in follower counts, following counts, lists, and tags like a pro statistician
 - 🐦 Tweets updates faster than you can say "Ethereum" when big changes happen
-- ⏰ Runs every 8 hours using GitHub Actions (because even bots need beauty sleep)
+- ⏰ Runs every hour using GitHub Actions (because even bots need beauty sleep)
 - 🧠 Has a memory better than an elephant, maintaining state between runs
 
 ## 🛠 Setup (Don't Worry, It's Easier Than Building IKEA Furniture)
@@ -15,7 +15,7 @@ Welcome to the coolest bot on the block! This little dynamo is obsessed with the
 1. Clone this repo (it won't bite, promise!)
 2. Install the bot's favorite snacks (dependencies):
    ```
-   pip install tweepy requests python-dotenv tqdm schedule
+   pip install tweepy requests python-dotenv tqdm backoff
    ```
 3. Set up Twitter API credentials (see "Protecting API Keys" section - we're all about that secret agent life)
 4. Configure GitHub Actions (see "GitHub Actions Setup" section - it's like training a digital puppy)
@@ -41,7 +41,7 @@ The `config.json` file is like your bot's mood ring. It contains:
 - `significant_following_change`: When to gossip about following count changes
 - `significant_list_change`: When to spill the tea about changes in lists
 - `significant_tag_change`: When to buzz about changes in tags
-- `max_tweets_per_run`: The bot's tweet limit per gossip session (we don't want it to be too chatty!)
+- `max_tweets_per_day`: The bot's tweet limit per gossip session (we don't want it to be too chatty!)
 - `tweet_interval_minutes`: How long the bot waits between tweets (it's all about the suspense)
 
 Adjust these values to fine-tune your bot's chattiness and sensitivity to the ever-changing world of Ethereum social dynamics!
@@ -66,7 +66,7 @@ Keep your API keys secret, keep them safe:
 2. Navigate to "Secrets and variables" > "Actions" (the bot's secret hideout)
 3. Add the Twitter API credentials as secrets (shhh, don't tell anyone)
 
-The `.github/workflows/efp_bot.yml` file is set up to run the bot every 8 hours. It's like having a very punctual, crypto-obsessed cuckoo clock!
+The `.github/workflows/efp_bot.yml` file is set up to run the bot every hour. It's like having a very punctual, crypto-obsessed cuckoo clock!
 
 ## 🎮 Usage (Letting Your Bot Off the Leash)
 
