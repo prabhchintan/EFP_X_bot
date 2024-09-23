@@ -4,12 +4,11 @@ import tweepy
 import os
 import logging
 import time
-import random
 from dotenv import load_dotenv
 from tqdm import tqdm
 import backoff
 from requests.exceptions import Timeout, RequestException
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Load environment variables
 load_dotenv()
@@ -18,7 +17,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # EFP API base URL
-EFP_API_BASE = "https://testing.ethfollow.xyz/api/v1"
+EFP_API_BASE = "https://api.ethfollow.xyz/api/v1"
 EFP_URL_BASE = "https://testing.ethfollow.xyz"
 
 # Twitter setup
@@ -52,11 +51,17 @@ def save_state(state):
         json.dump(state, f, indent=2)
 
 def load_tweet_count():
+    file_path = 'tweet_count.json'
+    if not os.path.exists(file_path):
+        return {'date': datetime.now().isoformat(), 'count': 0}
     try:
-        with open('tweet_count.json', 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {'month': datetime.now().month, 'count': 0}
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+            if datetime.fromisoformat(data['date']) < datetime.now().date():
+                return {'date': datetime.now().isoformat(), 'count': 0}
+            return data
+    except json.JSONDecodeError:
+        return {'date': datetime.now().isoformat(), 'count': 0}
 
 def save_tweet_count(tweet_count):
     with open('tweet_count.json', 'w') as f:
@@ -136,9 +141,16 @@ def detect_changes(old_data, new_data):
     old_lists = old_data.get('lists', {}).get('lists', [])
     new_lists = new_data.get('lists', {}).get('lists', [])
     if not old_lists and new_lists:
-        changes.append(("created_list", f"created their first @efp list: '{new_lists[0]['name']}'"))
-    elif len(new_lists) - len(old_lists) >= CONFIG['tweet_thresholds']['created_list']:
+        changes.append(("created_list", f"created first @efp list: '{new_lists[0]['name']}'"))
+    elif len(new_lists) - len(old_lists) >= CONFIG['significant_list_change']:
         changes.append(("list_change", f"created {len(new_lists) - len(old_lists)} new @efp lists"))
+    
+    # Check for significant follower changes
+    old_followers = int(old_data.get('stats', {}).get('followers_count', 0))
+    new_followers = int(new_data.get('stats', {}).get('followers_count', 0))
+    follower_change = new_followers - old_followers
+    if abs(follower_change) >= CONFIG['significant_follower_change']:
+        changes.append(("follower_change", f"{'gained' if follower_change > 0 else 'lost'} {abs(follower_change)} @efp followers"))
     
     # Check for significant following changes
     old_following = set(f['data'] for f in old_data.get('allFollowing', []))
@@ -152,21 +164,21 @@ def detect_changes(old_data, new_data):
         changes.append(("significant_follow", f"followed {', '.join(significant_follows)} on @efp"))
     
     # Check for unfollows
-    if len(unfollowed) >= CONFIG['tweet_thresholds']['unfollow']:
+    if len(unfollowed) >= CONFIG['significant_following_change']:
         changes.append(("unfollow", f"unfollowed {len(unfollowed)} accounts on @efp"))
     
     # Check for blocks
     old_blocks = set(f['data'] for f in old_data.get('allFollowing', []) if f.get('is_blocked', False))
     new_blocks = set(f['data'] for f in new_data.get('allFollowing', []) if f.get('is_blocked', False))
     blocked = new_blocks - old_blocks
-    if len(blocked) >= CONFIG['tweet_thresholds']['block']:
+    if blocked:
         changes.append(("block", f"blocked {len(blocked)} accounts on @efp"))
     
     # Check for mutes
     old_mutes = set(f['data'] for f in old_data.get('allFollowing', []) if f.get('is_muted', False))
     new_mutes = set(f['data'] for f in new_data.get('allFollowing', []) if f.get('is_muted', False))
     muted = new_mutes - old_mutes
-    if len(muted) >= CONFIG['tweet_thresholds']['mute']:
+    if muted:
         changes.append(("mute", f"muted {len(muted)} accounts on @efp"))
 
     return changes
@@ -176,6 +188,7 @@ def get_emoji_for_change_type(change_type):
         'new_user': '👋',
         'created_list': '📋',
         'list_change': '📊',
+        'follower_change': '📈',
         'significant_follow': '👥',
         'unfollow': '👋',
         'block': '🚫',
@@ -184,35 +197,40 @@ def get_emoji_for_change_type(change_type):
     return emoji_map.get(change_type, '')
 
 def can_tweet(tweet_count):
-    current_month = datetime.now().month
-    if tweet_count['month'] != current_month:
-        tweet_count['month'] = current_month
+    current_date = datetime.now().date()
+    count_date = datetime.fromisoformat(tweet_count['date']).date()
+    if current_date > count_date:
+        tweet_count['date'] = current_date.isoformat()
         tweet_count['count'] = 0
-    return tweet_count['count'] < CONFIG['max_tweets_per_month']
+    return tweet_count['count'] < CONFIG['max_tweets_per_day']
 
-def post_individual_tweet(tweet, tweet_count):
+def post_tweet(tweet, tweet_count):
     if can_tweet(tweet_count):
         try:
             response = twitter_client.create_tweet(text=tweet)
             logging.info(f"Tweet posted successfully! Tweet ID: {response.data['id']}")
             tweet_count['count'] += 1
             save_tweet_count(tweet_count)
-            time.sleep(CONFIG['tweet_interval_minutes'] * 60)
         except Exception as e:
             logging.error(f"Error posting tweet: {e}")
     else:
-        logging.warning("Monthly tweet limit reached. Skipping tweet.")
+        logging.warning("Daily tweet limit reached. Skipping tweet.")
 
-def generate_individual_tweets(all_changes):
-    tweets = []
-    for user, changes in all_changes:
-        for change_type, change_details in changes:
-            emoji = get_emoji_for_change_type(change_type)
-            tweet = f"{emoji} @efp: {user} {change_details}\n\nMore at {EFP_URL_BASE}/{user}"
-            tweets.append(tweet[:280])  # Ensure we don't exceed Twitter's character limit
-            if len(tweets) == CONFIG['max_tweets_per_run']:
-                return tweets
-    return tweets
+def generate_tweet(highlights, other_changes):
+    emoji, user, main_change = highlights[0]
+    tweet = f"{emoji} @efp: {user} {main_change}"
+    
+    if len(highlights) > 1:
+        emoji2, user2, change2 = highlights[1]
+        tweet += f"\n{emoji2} {user2} {change2}"
+    
+    if other_changes:
+        tweet += "\n\nOther updates:"
+        for _, user, change in other_changes[:3]:  # Limit to 3 other changes
+            tweet += f"\n• {user}: {change}"
+    
+    tweet += f"\n\nMore at {EFP_URL_BASE}"
+    return tweet[:280]  # Ensure we don't exceed Twitter's character limit
 
 def main():
     start_time = time.time()
@@ -223,7 +241,7 @@ def main():
         logging.error("No state loaded. Exiting.")
         return
 
-    users_to_process = list(state.keys())
+    users_to_process = list(WATCHLIST)  # Use the watchlist instead of state keys
     updated_state = {}
     all_changes = []
     failing_users = set()
@@ -232,7 +250,7 @@ def main():
         try:
             logging.info(f"Starting to process user: {user}")
             user_start_time = time.time()
-            old_data = state[user]
+            old_data = state.get(user)
             new_data = get_user_data(user)
             
             if new_data is None:
@@ -242,7 +260,7 @@ def main():
             else:
                 changes = detect_changes(old_data, new_data)
                 if changes:
-                    all_changes.append((user, changes))
+                    all_changes.extend([(get_emoji_for_change_type(c[0]), user, c[1]) for c in changes])
                     updated_state[user] = new_data
                     logging.info(f"Changes detected for {user}: {', '.join([c[1] for c in changes])}")
                 else:
@@ -261,15 +279,19 @@ def main():
     save_state(state)
     
     if all_changes:
-        tweets = generate_individual_tweets(all_changes)
-        for tweet in tweets:
-            post_individual_tweet(tweet, tweet_count)
+        highlights = all_changes[:2]  # Select top 2 changes as highlights
+        other_changes = all_changes[2:]
+        tweet = generate_tweet(highlights, other_changes)
+        post_tweet(tweet, tweet_count)
     else:
         logging.info("No changes detected for any users")
     
     total_time = time.time() - start_time
     logging.info(f"Total execution time: {total_time:.2f} seconds")
-    logging.info(f"Processed {len(updated_state)} users")
+    logging.info(f"Total users in watchlist: {len(WATCHLIST)}")
+    logging.info(f"Users processed: {len(updated_state)}")
+    logging.info(f"Users with consistently failing data: {len(failing_users)}")
+    logging.info(f"Tweets posted today: {tweet_count['count']}/{CONFIG['max_tweets_per_day']}")
 
     if failing_users:
         logging.warning(f"Users with consistently failing data: {', '.join(failing_users)}")

@@ -2,7 +2,7 @@ import requests
 import json
 import logging
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 import backoff
 
@@ -55,13 +55,14 @@ def get_paginated_data(user, endpoint):
 def get_user_data(user):
     logging.info(f"Starting to fetch data for {user}")
     user_data = {}
-    endpoints = ['details', 'stats', 'lists', 'following', 'ens', 'account']
+    endpoints = ['details', 'stats', 'followers', 'following', 'ens']
 
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
         future_to_endpoint = {
             executor.submit(get_endpoint_data, user, endpoint): endpoint 
-            for endpoint in endpoints if endpoint != 'following'
+            for endpoint in endpoints if endpoint not in ['followers', 'following']
         }
+        future_to_endpoint[executor.submit(get_paginated_data, user, 'followers')] = 'followers'
         future_to_endpoint[executor.submit(get_paginated_data, user, 'following')] = 'following'
 
         for future in as_completed(future_to_endpoint):
@@ -78,7 +79,7 @@ def get_user_data(user):
     return user, user_data
 
 def validate_user_data(user_data):
-    required_keys = ['details', 'stats', 'lists', 'following']
+    required_keys = ['details', 'stats', 'followers', 'following']
     return all(key in user_data for key in required_keys)
 
 def save_state(state, filename='initial_state.json'):
@@ -119,10 +120,12 @@ def main():
                     logging.info(f"Successfully processed data for {user}")
                 else:
                     failing_users.add(user)
+                    initial_state[user] = None  # Add failed users to the state with None value
                     logging.warning(f"Failed to fetch complete data for user {user}")
-            except TimeoutError:
+            except Exception as e:
                 failing_users.add(user)
-                logging.error(f"Timeout while fetching data for user {user}")
+                initial_state[user] = None  # Add failed users to the state with None value
+                logging.error(f"Error while fetching data for user {user}: {str(e)}")
             
             processed_users.add(user)
             save_partial_progress(initial_state, processed_users)
@@ -135,6 +138,9 @@ def main():
     if failing_users:
         logging.warning(f"Users with incomplete data: {', '.join(failing_users)}")
     
+    logging.info(f"Total users processed: {len(initial_state)}")
+    logging.info(f"Successful users: {len(initial_state) - len(failing_users)}")
+    logging.info(f"Failed users: {len(failing_users)}")
     logging.info("Initial state download completed.")
 
 if __name__ == "__main__":
