@@ -1,0 +1,7 @@
+9/25:
+
+updates to make tomorrow:
+
+- use last updated timestamp in initial_state to run accounts not ran today
+- go thorugh api docs and brainstorm better workflow that runs much better
+- tweets should mention increments of 25, PLUS specific follows/unfollows/blocks/unblocks/mutes/unmutes from watchlist

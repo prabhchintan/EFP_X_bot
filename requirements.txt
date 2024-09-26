@@ -1,7 +1,5 @@
-requests>=2.27.0,<3
-tweepy==4.10.0
-python-dotenv==0.19.1
-tqdm==4.62.3
-deepdiff==5.7.0
-schedule==1.1.0
+requests>=2.31.0,<3
+tweepy==4.14.0
+python-dotenv==1.0.0
+tqdm==4.66.1
 backoff==2.2.1

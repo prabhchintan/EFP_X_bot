@@ -1,0 +1,2013 @@
+{
+  "brantly.eth": {
+    "has_profile": true,
+    "list_id": "3",
+    "has_active_list": true,
+    "ens": {
+      "ens": {
+        "name": "brantly.eth",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "avatar": "https://euc.li/brantly.eth",
+        "records": {
+          "avatar": "https://euc.li/brantly.eth",
+          "com.discord": "brantly.eth",
+          "com.github": "brantlymillegan",
+          "com.twitter": "brantlymillegan",
+          "description": "Catholic, husband, father | building @efp.eth | ENS (DAO delegate, former core team) | Sign-in with Ethereum (creator)",
+          "email": "me@brantly.xyz",
+          "header": "https://i.imgur.com/Quo06x2.png",
+          "location": "USA",
+          "name": "Brantly Millegan",
+          "org.telegram": "brantlymillegan",
+          "url": "https://ethfollow.xyz/"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      }
+    },
+    "stats": {
+      "followers_count": 6,
+      "following_count": 6
+    },
+    "following": [
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x2b9bda137dfc081efa0e0355874a5bc39a372305",
+        "address": "0x2b9bda137dfc081efa0e0355874a5bc39a372305",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+        "address": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+        "address": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "tags": []
+      }
+    ],
+    "followers": [
+      {
+        "efp_list_nft_token_id": "15",
+        "address": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "9",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "8",
+        "address": "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+        "tags": [
+          "top8",
+          "x"
+        ],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "10",
+        "address": "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "4",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "1",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      }
+    ],
+    "allFollowingAddresses": [
+      "0x2b9bda137dfc081efa0e0355874a5bc39a372305",
+      "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+      "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+      "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+      "0xe2cded674643743ec1316858dfd4fd2116932e63"
+    ],
+    "tags": {
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "tags": [],
+      "tagCounts": [],
+      "taggedAddresses": []
+    },
+    "details": {
+      "address": "0x983110309620d911731ac0932219af06091b6744",
+      "ens": {
+        "name": "brantly.eth",
+        "avatar": "https://euc.li/brantly.eth",
+        "records": {
+          "avatar": "https://euc.li/brantly.eth",
+          "com.discord": "brantly.eth",
+          "com.github": "brantlymillegan",
+          "com.twitter": "brantlymillegan",
+          "description": "Catholic, husband, father | building @efp.eth | ENS (DAO delegate, former core team) | Sign-in with Ethereum (creator)",
+          "email": "me@brantly.xyz",
+          "header": "https://i.imgur.com/Quo06x2.png",
+          "location": "USA",
+          "name": "Brantly Millegan",
+          "org.telegram": "brantlymillegan",
+          "url": "https://ethfollow.xyz/"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      },
+      "ranks": {
+        "mutuals_rank": "2",
+        "followers_rank": "2",
+        "following_rank": "4",
+        "top8_rank": "1",
+        "blocks_rank": 0
+      },
+      "primary_list": "3"
+    }
+  },
+  "0xthrpw.eth": {
+    "has_profile": true,
+    "list_id": "9",
+    "has_active_list": true,
+    "ens": {
+      "ens": {
+        "name": "0xthrpw.eth",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "avatar": "https://euc.li/0xthrpw.eth",
+        "records": {
+          "avatar": "https://euc.li/0xthrpw.eth",
+          "com.github": "0xthrpw",
+          "com.twitter": "0xthrpw",
+          "description": "Took the mirrors off my cadillac because I don't like looking like I look back.",
+          "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+          "name": "throw;"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      }
+    },
+    "stats": {
+      "followers_count": 6,
+      "following_count": 7
+    },
+    "following": [
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xbe4f0cdf3834bd876813a1037137dcfad79acd99",
+        "address": "0xbe4f0cdf3834bd876813a1037137dcfad79acd99",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+        "address": "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+        "address": "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x983110309620d911731ac0932219af06091b6744",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+        "address": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+        "tags": []
+      }
+    ],
+    "allFollowingAddresses": [
+      "0xbe4f0cdf3834bd876813a1037137dcfad79acd99",
+      "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+      "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+      "0x983110309620d911731ac0932219af06091b6744",
+      "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "0xe2cded674643743ec1316858dfd4fd2116932e63",
+      "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516"
+    ],
+    "followers": [
+      {
+        "efp_list_nft_token_id": "15",
+        "address": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "8",
+        "address": "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "10",
+        "address": "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "4",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "3",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "1",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      }
+    ],
+    "details": {
+      "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+      "ens": {
+        "name": "0xthrpw.eth",
+        "avatar": "https://euc.li/0xthrpw.eth",
+        "records": {
+          "avatar": "https://euc.li/0xthrpw.eth",
+          "com.github": "0xthrpw",
+          "com.twitter": "0xthrpw",
+          "description": "Took the mirrors off my cadillac because I don't like looking like I look back.",
+          "header": "https://storage.googleapis.com/nftimagebucket/tokens/0xb7def63a9040ad5dc431aff79045617922f4023a/1897.svg",
+          "name": "throw;"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      },
+      "ranks": {
+        "mutuals_rank": 0,
+        "followers_rank": "2",
+        "following_rank": "3",
+        "top8_rank": "2",
+        "blocks_rank": 0
+      },
+      "primary_list": "9"
+    },
+    "tags": {
+      "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+      "tags": [],
+      "tagCounts": [],
+      "taggedAddresses": []
+    }
+  },
+  "encrypteddegen.eth": {
+    "has_profile": true,
+    "list_id": "1",
+    "has_active_list": true,
+    "ens": {
+      "ens": {
+        "name": "encrypteddegen.eth",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "avatar": "https://euc.li/encrypteddegen.eth",
+        "records": {
+          "avatar": "https://euc.li/encrypteddegen.eth",
+          "com.discord": "encrypteddegen.eth",
+          "com.github": "encryptedDegen",
+          "com.twitter": "ZunecJan",
+          "description": "UI/UX Designer & Developer | Building the web3 social graph @efp.eth",
+          "header": "https://i.imgur.com/pWYMFBn.jpeg",
+          "org.telegram": "encrypteddegen"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      }
+    },
+    "allFollowingAddresses": [
+      "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+      "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+      "0x983110309620d911731ac0932219af06091b6744",
+      "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+      "0xe2cded674643743ec1316858dfd4fd2116932e63"
+    ],
+    "stats": {
+      "followers_count": 7,
+      "following_count": 6
+    },
+    "followers": [
+      {
+        "efp_list_nft_token_id": "15",
+        "address": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "9",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "8",
+        "address": "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "10",
+        "address": "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "4",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "3",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "1",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      }
+    ],
+    "following": [
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+        "address": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+        "address": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x983110309620d911731ac0932219af06091b6744",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "tags": []
+      }
+    ],
+    "details": {
+      "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "ens": {
+        "name": "encrypteddegen.eth",
+        "avatar": "https://euc.li/encrypteddegen.eth",
+        "records": {
+          "avatar": "https://euc.li/encrypteddegen.eth",
+          "com.discord": "encrypteddegen.eth",
+          "com.github": "encryptedDegen",
+          "com.twitter": "ZunecJan",
+          "description": "UI/UX Designer & Developer | Building the web3 social graph @efp.eth",
+          "header": "https://i.imgur.com/pWYMFBn.jpeg",
+          "org.telegram": "encrypteddegen"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      },
+      "ranks": {
+        "mutuals_rank": "1",
+        "followers_rank": "1",
+        "following_rank": "4",
+        "top8_rank": "2",
+        "blocks_rank": 0
+      },
+      "primary_list": "1"
+    },
+    "tags": {
+      "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "tags": [],
+      "tagCounts": [],
+      "taggedAddresses": []
+    }
+  },
+  "bendi.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "vitalik.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mikedemarais.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "rsa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "davidhoffman.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "drea.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "garypalmerjr.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jesse.xyz": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "james.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "griff.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sassal.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "nick.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jefflau.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "matoken.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "khori.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "evanmoyer.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sadaf.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "184.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "leontalbert.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "hayden.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "chainlinkgod.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "antiprosynthesis.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ericakang.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "barmstrong.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "cdixon.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "benahorowitz.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "santi.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "lefteris.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ethlimo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "coinbase.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "gregskril.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "avsa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "eric.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "base.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "timbeiko.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "efp.eth": {
+    "has_profile": true,
+    "list_id": "4",
+    "has_active_list": true,
+    "ens": {
+      "ens": {
+        "name": "efp.eth",
+        "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+        "avatar": "https://euc.li/efp.eth",
+        "records": {
+          "avatar": "https://euc.li/efp.eth",
+          "com.github": "ethereumfollowprotocol",
+          "com.twitter": "efp",
+          "description": "It's about who you know. An onchain social graph protocol for Ethereum accounts.",
+          "header": "https://i.imgur.com/oIhHnZ5.png",
+          "location": "Ethereum",
+          "url": "https://ethfollow.xyz/"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      }
+    },
+    "stats": {
+      "followers_count": 6,
+      "following_count": 6
+    },
+    "following": [
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x2b9bda137dfc081efa0e0355874a5bc39a372305",
+        "address": "0x2b9bda137dfc081efa0e0355874a5bc39a372305",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+        "address": "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+        "address": "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0x983110309620d911731ac0932219af06091b6744",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": []
+      },
+      {
+        "version": 1,
+        "record_type": "address",
+        "data": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "tags": []
+      }
+    ],
+    "followers": [
+      {
+        "efp_list_nft_token_id": "15",
+        "address": "0x5b0f3dbdd49614476e4f5ff5db6fe13d41fcb516",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "9",
+        "address": "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "8",
+        "address": "0xcac3fddb461d20c6cdcf0244e38d0184969b08b7",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "10",
+        "address": "0x39b33a79f42453b1befab2435e5aab8169c1b3b4",
+        "tags": [],
+        "is_following": false,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "3",
+        "address": "0x983110309620d911731ac0932219af06091b6744",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      },
+      {
+        "efp_list_nft_token_id": "1",
+        "address": "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+        "tags": [],
+        "is_following": true,
+        "is_blocked": false,
+        "is_muted": false
+      }
+    ],
+    "allFollowingAddresses": [
+      "0x2b9bda137dfc081efa0e0355874a5bc39a372305",
+      "0x71adb34117c9408e74ed112b327a0ec97cef8fa1",
+      "0x8f5906963ae276e1631efa8ff1a9cae6499ec5e3",
+      "0x983110309620d911731ac0932219af06091b6744",
+      "0xc983ebc9db969782d994627bdffec0ae6efee1b3",
+      "0xc9c3a4337a1bba75d0860a1a81f7b990dc607334"
+    ],
+    "tags": {
+      "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+      "tags": [],
+      "tagCounts": [],
+      "taggedAddresses": []
+    },
+    "details": {
+      "address": "0xe2cded674643743ec1316858dfd4fd2116932e63",
+      "ens": {
+        "name": "efp.eth",
+        "avatar": "https://euc.li/efp.eth",
+        "records": {
+          "avatar": "https://euc.li/efp.eth",
+          "com.github": "ethereumfollowprotocol",
+          "com.twitter": "efp",
+          "description": "It's about who you know. An onchain social graph protocol for Ethereum accounts.",
+          "header": "https://i.imgur.com/oIhHnZ5.png",
+          "location": "Ethereum",
+          "url": "https://ethfollow.xyz/"
+        },
+        "updated_at": "2024-09-24T15:25:18.517Z"
+      },
+      "ranks": {
+        "mutuals_rank": "2",
+        "followers_rank": "2",
+        "following_rank": "4",
+        "top8_rank": "2",
+        "blocks_rank": 0
+      },
+      "primary_list": "4"
+    }
+  },
+  "fredwilson.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "nonlinear.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "fiveoutofnine.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "balajis.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pedrouid.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "coopahtroopa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "lindaxie.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ercwl.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jacob.willemsma.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dwr.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jacob.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "limes.wannabet.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "aneri.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "banteg.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jda.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "bored.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "evan.ethereum.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ada.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tacha.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "flaherty.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sriramk.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tobi.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "agm.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "bunb.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "furyan.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "virgil.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "skylar.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "defidad.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jalil.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "androolloyd.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "liam.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "visualizevalue.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "5pence.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "alextnetto.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "coltron.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "superphiz.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "liubenben.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "spikewatanabe.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "master.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ppmcghee.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "gotrilla.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "beast.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jebus.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tetranode.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "zadok7.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pol.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "thecap.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "validator.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "yasink.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "joseph.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "coolwin.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tgerring.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "0xmerlin.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "gratefulape.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "rainbowwallet.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "poap.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "slobo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tobias.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "brukhman.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "bosco.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "shanemac.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "premm.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "horsefacts.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "maurelian.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "woj.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ccarella.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "brenner.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "corbin.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "j4ck.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "antimofm.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "alexgrover.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "shea.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dragonite.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "zoz.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dylsteck.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "accountless.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "kugusha.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "alexmasmej.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "lght.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "maxp.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sdv.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "limone.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "gabrielayuso.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "anatcrypto.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "esdotge.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "aaronrferguson.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "koeppelmann.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "worm.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mxjxn.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jpren.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "nickbytes.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ansgar.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "kchamp.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "kmacb.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "borodutch.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "usersteen.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "chaskin.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "fufuprophet.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "thatalexpalmer.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "vrypan.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jithinraj.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "warface228.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "compez.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "m-j-r.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "thumbsup.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "yes2crypto.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "drews.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "typeof.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "maretus.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mantine.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "scottrepreneur.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "raichu.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "bleu.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "cointf.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sammdec.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "bgrill.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ispeaknerd.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "aaronvick.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "eitzi.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "symbiotech.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "androidsixteen.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "miguelgarest.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "grunt.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "0xluo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "chillyazz.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tomu.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "zineuc.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "angelus.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "marijuanaaa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "generalism.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dsord3r.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "annoushka.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "aghahowa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pentacle.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "kia.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dudewith.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "andreitr.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "svvvg3.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dialethia.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "catra.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tomato.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "121020.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mortespiral.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "willywonka.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "patkia.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sevvv.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tomasalpha.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "cryptowenmoon.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "zksinc.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mingming13.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "wmp.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "netopwibby.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "459oyaji.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "yukisato.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "warpie.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "hodges.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "loudman.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "geaux.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "toucan-kim.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "yeradaoti.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mishaderidder.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "basedmedia.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "vinayvasanji.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pravijn.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jakeonchain.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "niftyswaps.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pratiksharma.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "rphgrc.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "hoshinoun.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "leaolmos.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "treeskulltown.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "swindler.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "teradegen.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "coolbeans1r.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "siablo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "greencross.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "joobid.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "iamnick.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "polmaire.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "nhagio.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "diamondore.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ramaneffect24.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mstublefield.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "timmaxwell.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mylove89.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "rohekbenitez.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "biterror.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pedrovilela.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "mahdiweb3.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jonnyringo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "swishh.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pifours.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "okuto.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sea-otter.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "srijan.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "totty.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "incarterseyes.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "zerohex.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "stevedylandev.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "royalaid.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "qsteak.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "pablofb.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "alexeirox.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tycoonpunks.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "tempetechie.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jonbray.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "iborequickly.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "starl3xx.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "zoorb.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "prouddegen.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "0xgiwa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "0xkosk.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "emo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "crpdaddy.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "indicub.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "superlouis.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "gilalter.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "sajiiiiiiii8.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "farzanzare.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "cosmicki.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "launamu.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ndx.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jonstokes.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "jrag.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "richerd.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "julieshi.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "anett.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "\ud83e\udd35\ud83c\udffc\u200d\u2642\ufe0f.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "traf.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "cory.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "esm.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "dima.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "geet.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "ricmoo.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  },
+  "randhawa.eth": {
+    "has_profile": false,
+    "list_id": null,
+    "has_active_list": false
+  }
+}

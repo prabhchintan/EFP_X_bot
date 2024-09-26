@@ -1,89 +1,88 @@
-# 🚀 EFP Twitter Bot: The Ethereum Follow Protocol's Biggest Fan! 🐦
+# EFP Twitter Bot
 
-Welcome to the coolest bot on the block! This little dynamo is obsessed with the Ethereum Follow Protocol (EFP) leaderboard. It's like a paparazzo for Ethereum accounts, but way less annoying and much more informative!
+## Overview
 
-## 🎭 Features (AKA "The Bot's Superpowers")
+The EFP Twitter Bot is an automated system designed to monitor and report changes in the Ethereum Follow Protocol (EFP) ecosystem. It tracks a specified list of Ethereum accounts, detects changes in their EFP data, and posts updates to Twitter.
 
-- 🕵️‍♂️ Stalks (ahem, "monitors") a customizable list of Ethereum accounts via the EFP API
-- 📊 Tracks changes in follower counts, following counts, lists, and tags like a pro statistician
-- 🐦 Tweets updates faster than you can say "Ethereum" when big changes happen
-- ⏰ Runs every hour using GitHub Actions (because even bots need beauty sleep)
-- 🧠 Has a memory better than an elephant, maintaining state between runs
+## Features
 
-## 🛠 Setup (Don't Worry, It's Easier Than Building IKEA Furniture)
+- Monitors a customizable list of Ethereum accounts via the EFP API
+- Tracks changes in follower counts, following counts, lists, and tags
+- Detects relationship changes (follows, unfollows, blocks, mutes) between monitored accounts
+- Posts updates to Twitter when significant changes occur
+- Runs periodically using GitHub Actions
+- Maintains state between runs for consistent tracking
 
-1. Clone this repo (it won't bite, promise!)
-2. Install the bot's favorite snacks (dependencies):
+## Setup
+
+1. Clone the repository
+2. Install dependencies:
    ```
-   pip install tweepy requests python-dotenv tqdm backoff
+   pip install -r requirements.txt
    ```
-3. Set up Twitter API credentials (see "Protecting API Keys" section - we're all about that secret agent life)
-4. Configure GitHub Actions (see "GitHub Actions Setup" section - it's like training a digital puppy)
+3. Set up Twitter API credentials (see "Environment Variables" section)
+4. Configure GitHub Actions (see "GitHub Actions Setup" section)
 
-## 🏁 Initial State Download (The Bot's First Day at School)
+## Initial State Download
 
-Before your bot can run wild, it needs to learn the basics:
+Before running the bot:
 
-1. Update your `config.json` with all the cool kids (accounts) you want to monitor
-2. Run the initial state download script (it's like the bot's first homework assignment):
+1. Update `config.json` with the list of accounts to monitor
+2. Run the initial state download script:
    ```
    python initial_state_download.py
    ```
-3. This creates an `initial_state.json` file (the bot's yearbook of monitored accounts)
+3. This creates an `initial_state.json` file with the initial data for monitored accounts
 
-## ⚙️ Configuration (Customizing Your Bot's Personality)
+## Configuration
 
-The `config.json` file is like your bot's mood ring. It contains:
+The `config.json` file contains:
 
-- `watchlist`: The bot's VIP list of Ethereum accounts to stalk... er, monitor
-- `check_interval_hours`: How often the bot wakes up for its crypto gossip session (aligned with GitHub Actions)
-- `significant_follower_change`: When to get excited about follower count changes
-- `significant_following_change`: When to gossip about following count changes
-- `significant_list_change`: When to spill the tea about changes in lists
-- `significant_tag_change`: When to buzz about changes in tags
-- `max_tweets_per_day`: The bot's tweet limit per gossip session (we don't want it to be too chatty!)
-- `tweet_interval_minutes`: How long the bot waits between tweets (it's all about the suspense)
+- `watchlist`: List of Ethereum accounts to monitor
+- `check_interval_hours`: Frequency of checks (aligned with GitHub Actions)
+- `significant_follower_change`: Threshold for reporting follower count changes
+- `significant_following_change`: Threshold for reporting following count changes
+- `significant_list_change`: Threshold for reporting changes in lists
+- `significant_tag_change`: Threshold for reporting changes in tags
 
-Adjust these values to fine-tune your bot's chattiness and sensitivity to the ever-changing world of Ethereum social dynamics!
+Adjust these values to customize the bot's sensitivity and reporting frequency.
 
-## 🔐 Protecting API Keys (Because We're Not About That Public Life)
+## Environment Variables
 
-Keep your API keys secret, keep them safe:
+Store your API keys securely:
 
-1. Create a `.env` file in your project root (it's like a diary for your bot)
+1. Create a `.env` file in the project root
 2. Add your Twitter API credentials:
    ```
-   TWITTER_CONSUMER_KEY=super_secret_key_here
-   TWITTER_CONSUMER_SECRET=even_more_secret_key_here
-   TWITTER_ACCESS_TOKEN=top_secret_token_here
-   TWITTER_ACCESS_TOKEN_SECRET=ultra_secret_token_here
+   TWITTER_CONSUMER_KEY=your_consumer_key
+   TWITTER_CONSUMER_SECRET=your_consumer_secret
+   TWITTER_ACCESS_TOKEN=your_access_token
+   TWITTER_ACCESS_TOKEN_SECRET=your_access_token_secret
    ```
-3. Add `.env` to your `.gitignore` file (what happens in `.env`, stays in `.env`)
+3. Add `.env` to your `.gitignore` file
 
-## 🤖 GitHub Actions Setup (Teaching Your Bot to Fly Solo)
+## GitHub Actions Setup
 
-1. Go to your GitHub repository settings (it's like the bot's control panel)
-2. Navigate to "Secrets and variables" > "Actions" (the bot's secret hideout)
-3. Add the Twitter API credentials as secrets (shhh, don't tell anyone)
+1. Go to your GitHub repository settings
+2. Navigate to "Secrets and variables" > "Actions"
+3. Add the Twitter API credentials as secrets
 
-The `.github/workflows/efp_bot.yml` file is set up to run the bot every hour. It's like having a very punctual, crypto-obsessed cuckoo clock!
+The `.github/workflows/efp_bot.yml` file is configured to run the bot periodically.
 
-## 🎮 Usage (Letting Your Bot Off the Leash)
+## Usage
 
-The bot runs automatically via GitHub Actions, living its best life in the cloud. But if you want to run it locally (maybe it needs a walk?):
+The bot runs automatically via GitHub Actions. To run it locally:
 
 ```
 python efp_bot.py
 ```
 
-Just make sure you've set the environment variables first. We don't want our bot getting lost!
+Ensure environment variables are set before running locally.
 
-## 🤝 Contributing (Join the Bot Party!)
+## Contributing
 
-Contributions are welcome! Got an idea to make this bot even cooler? Submit a Pull Request and let's make magic happen!
+Contributions are welcome. Please submit a Pull Request with any enhancements.
 
-## 📜 License
+## License
 
-This project is open source and available under the [MIT License](LICENSE). Use it wisely, and may the force of Ethereum be with you!
-
-Remember, in the world of crypto, this bot's not the hero we deserved, but the hero we needed. Happy monitoring, and may your transactions always be fast and your gas fees low! 🚀🌕
+This project is open source and available under the [MIT License](LICENSE).
